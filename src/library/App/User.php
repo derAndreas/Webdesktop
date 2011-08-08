@@ -2,7 +2,7 @@
 /**
  * Description of User
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_User {
     /**

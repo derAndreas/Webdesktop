@@ -2,7 +2,7 @@
 /**
  * Description of Db
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Auth_Strategy_Db {
     /**

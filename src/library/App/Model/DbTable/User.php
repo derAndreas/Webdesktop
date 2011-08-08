@@ -2,7 +2,7 @@
 /**
  * Description of user
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Model_DbTable_User extends Zend_Db_Table_Abstract {
 

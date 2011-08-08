@@ -10,8 +10,8 @@
  * @package Admin
  * @subpackage Model_Model_DbRow
  * @namespace Admin_Model_DbRow
- * @see ExtJs4 <http://www.sencha.com>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3.0
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
  */
 
 /**

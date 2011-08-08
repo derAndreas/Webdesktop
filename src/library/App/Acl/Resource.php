@@ -2,7 +2,7 @@
 /**
  * Description of Resource
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Acl_Resource implements Zend_Acl_Resource_Interface {
     /**

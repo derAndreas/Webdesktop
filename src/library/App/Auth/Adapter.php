@@ -2,7 +2,7 @@
 /**
  * Description of adapter
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Auth_Adapter implements Zend_Auth_Adapter_Interface {
     

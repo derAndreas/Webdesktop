@@ -2,7 +2,7 @@
 /**
  * Description of Module
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Controller_Plugin_Layout_Module extends Zend_Controller_Plugin_Abstract {
 

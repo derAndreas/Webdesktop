@@ -9,8 +9,8 @@
  * @package Webdesktop
  * @subpackage Model_Modules
  * @namespace Webdesktop_Model_Modules
- * @see ExtJs4 <http://www.sencha.com>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3.0
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
  */
 
 /**
@@ -39,32 +39,35 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
      */
     public $actions = array(
         'index',
-        'loadUserGroups',               # used
         'loadUserUsers',                # used
         'saveNewUser',                  # used
         'saveEditUser',                 # used
         'saveDeleteUser',               # used
         'saveEditUserPw',               # used
-        'saveNewGroup',                 # used
+
         'loadGroupGroups',              # used
+        'saveNewGroup',                 # used
         'saveEditGroup',                # used
         'saveDeleteGroup',              # used
-        'saveNewRole',                  # used
+
         'loadRoleRoles',                # used
+        'saveNewRole',                  # used
         'saveEditRole',                 # used
         'saveDeleteRole',               # used
+
         'loadControllerControllers',    # used
-        'changeControllerStatus',       # used
         'saveAddController',            # used
         'saveEditController',           # used
-        'saveDeleteController',
-        'loadControllerActions',        # used
-        'saveDeleteControllerAction',
+        'saveDeleteController',         # not implemented
+        'changeControllerStatus',       # used
         'loadControllerPermissions',    # used
         'saveControllerPermissions',    # used
-        'changeActionStatus',           # used
-        'saveEditAction',               # used
+
+        'loadControllerActions',        # used
         'saveAddAction',                # used
+        'saveEditAction',               # used
+        'saveDeleteAction',             # used
+        'changeActionStatus',           # used
         'loadActionPermissions',        # used
         'saveActionPermissions'         # used
     );
@@ -84,6 +87,8 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
      * Return only the Id and name for the group as an array
      *
      * @return array
+     * @todo neeeded? I think can be removed
+     * @deprecated
      */
     public function loadUserGroupsAction()
     {
@@ -710,7 +715,6 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
      * Delete a Controller from the Database
      *
      * @return array
-     * @todo fixme, currently unused?
      */
     public function saveDeleteControllerAction()
     {

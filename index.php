@@ -1,12 +1,5 @@
 <?php
 
-//FIXME: remove this function, just debugging
-function da($x) {
-    echo "<pre>";
-    var_dump(func_get_args());
-    echo "</pre>";
-}
-
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/src/application'));

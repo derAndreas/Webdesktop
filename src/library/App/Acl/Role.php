@@ -2,7 +2,7 @@
 /**
  * Description of Role
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Acl_Role implements Zend_Acl_Role_Interface {
 

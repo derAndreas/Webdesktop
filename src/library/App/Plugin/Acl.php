@@ -2,7 +2,7 @@
 /**
  * Description of Acl
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
     /**

@@ -2,7 +2,7 @@
 /**
  * Description of login
  *
- * @author Godfather
+ * @author Andreas
  */
 class App_Form_Auth_LoginDb extends Zend_Form {
     /**
