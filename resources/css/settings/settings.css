@@ -1,0 +1,93 @@
+
+.module-settings .icon-background {
+    background-image: url("../../images/settings/icon-wallpaper.png") !important;
+}
+.module-settings .icon-theme {
+    background-image: url("../../images/settings/icon-theme.png") !important
+}
+.module-settings .icon-color {
+    background-image: url("../../images/settings/icon-color.png") !important
+}
+.module-settings .icon-shortcut {
+    background-image: url("../../images/settings/icon-shortcut.png") !important
+}
+.module-settings .icon-autorun {
+    background-image: url("../../images/settings/icon-autorun.png") !important
+}
+.module-settings .icon-quickstart {
+    background-image: url("../../images/settings/icon-quickstart.png") !important
+}
+
+
+.module-settings .wallpapers-title {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #CCC;
+}
+
+.module-settings .x-item {
+    padding: 4px;
+}
+.module-settings .x-item-over {
+    padding: 4px;
+    border:1px solid #dddddd;
+    background: #efefef url(../../images/settings/over.gif) repeat-x left top;
+}
+
+.module-settings .x-item-selected{
+    background: #eff5fb url(../../images/settings/selected.gif) no-repeat right bottom;
+    border:1px solid #99bbe8;
+}
+.module-settings .x-item-selected .thumb{
+    background:transparent;
+}
+
+
+
+
+.module-settings .themes-selector .x-panel-body{
+    background: white;
+    font: 11px Arial, Helvetica, sans-serif;
+}
+.module-settings .themes-selector .thumb{
+    background: #dddddd;
+    padding: 3px;
+    padding-bottom: 0;
+}
+
+.x-quirks .module-settings .themes-selector .thumb {
+    padding-bottom: 3px;
+}
+
+.module-settings .themes-selector .thumb img{
+    height: 60px;
+    width: 80px;
+}
+.module-settings .themes-selector .thumb-wrap{
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+}
+.module-settings .themes-selector .thumb-wrap span {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    width: 86px;
+}
+
+.module-settings .themes-selector .x-item-over{
+    border:1px solid #dddddd;
+    background: #efefef url(../../images/settings/over.gif) repeat-x left top;
+    padding: 4px;
+}
+
+.module-settings .themes-selector .x-item-selected{
+    background: #eff5fb url(../../images/settings/selected.gif) no-repeat right bottom;
+    border:1px solid #99bbe8;
+    padding: 4px;
+}
+.module-settings .themes-selector .x-item-selected .thumb{
+    background:transparent;
+}

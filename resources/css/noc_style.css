@@ -1,0 +1,81 @@
+
+/* 
+    Document   : style
+    Created on : 16.05.2009, 21:55:28
+    Author     : Andreas Mairhofer
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.container {
+    border: 1px solid #CCC;
+    border-top: none;
+    padding: 0 10px 10px 10px;
+}
+
+ul {
+    list-style-type: square;
+
+}
+
+#zfContent textarea {
+    width:300px;
+    height:100px;
+    padding:5px;
+}
+
+#zfContent input.disabled, textarea.disabled {
+    color: #FFFFFF;
+    background-color: #C0C0C0;
+}
+#zfContent select {
+    padding: 2px;
+}
+
+.hide {
+    display: none;
+}
+
+#zfHeader {
+    border-top: 5px solid #1f85ca;
+}
+
+.zend_form{
+    background:#fff;
+    margin: 0 3em;
+    padding:0;
+    
+}
+
+.zend_form dt{
+    padding:0;
+    clear:both;
+    width:30%;
+    float:left;
+    text-align:right;
+    margin:5px 5px 5px 0;
+}
+
+.zend_form dd{
+    padding:0;
+    float:left;
+    width:68%;
+    margin:5px 2px 5px 0;
+}
+
+.zend_form p{
+    padding:0;
+    margin:0;
+}
+
+.zend_form input, .zend_form textarea, .zend_form select {
+    margin:0 0 2px 0;
+}
+
+.member-launch {
+    background-color: #F0F0F0;
+    border: 1px solid #CCC;
+    float: left;
+    margin-left: 10px;
+    padding: 10px 5px;
+    text-align: center;
+}

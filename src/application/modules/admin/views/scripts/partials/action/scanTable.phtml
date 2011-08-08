@@ -1,0 +1,37 @@
+<h3><?= $this->title; ?></h3>
+<?php IF($this->data !== FALSE && count($this->data) > 0): ?>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>id</th> -->
+            <th>action name</th>
+            <th>active</th>
+            <th>&nbsp;</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->data AS $action): ?>
+        <tr>
+            <!-- <td><?= $action->get('id'); ?></td> -->
+            <td><?= $action->get('actionName'); ?></td>
+            <td><?= $action->get('enabled') === 1 ? 'yes' : 'no'; ?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'module'     => 'admin',
+                    'controller' => 'action',
+                    'action'     => $this->actionMethod,
+                    'actionname' => $action->get('actionName'),
+                    'id'         => $action->get('id')
+                ));?>"><?= $this->linkText; ?></a>
+            </td>
+            <td><?= $this->escape($action->get('description')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>
+<?php ELSE: ?>
+<p class="notice">
+    There are no <?= $this->title; ?>
+</p>
+<?php ENDIF; ?>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="en" />
+    <title>NOC Administration</title>
+    <link rel="stylesheet" href="/noc/resources/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/noc/resources/css/noc_style.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/noc/resources/css/blueprint/print.css" type="text/css" media="print">
+    <link rel="stylesheet" href="/noc/resources/css/blueprint/plugins/buttons/screen.css" type="text/css" media="print">
+    <!--[if IE]><link rel="stylesheet" href="/noc/resources/css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="block">
+            <div id="zfHeader" class="column span-24">
+                <h1>Administration Center</h1>
+            </div>
+        </div>
+        <div class="block">
+            <div id="zfMenu" class="column span-4">
+                <label>Usermanagement</label>
+                <ul>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'user',
+                            'action'     => 'index'
+                        )) ?>">Liste Users</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'user',
+                            'action'     => 'add'
+                        )) ?>">Add New User</a>
+                    </li>
+                </ul>
+                <label>Groupmanagement</label>
+                <ul>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'group',
+                            'action'     => 'index'
+                        )) ?>">Liste Groups</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'group',
+                            'action'     => 'add'
+                        )) ?>">Add New Group</a>
+                    </li>
+                </ul>
+                <label>Resourcemanagement</label>
+                <ul>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'controller',
+                            'action'     => 'index'
+                        )) ?>">Edit Controllers</a>
+                    </li>
+                </ul>
+                <label>RoleManagement</label>
+                <ul>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'role',
+                            'action'     => 'index'
+                        )) ?>">Liste Roles</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'role',
+                            'action'     => 'add'
+                        )) ?>">Create New Role</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="zfContent" class="column span-19">
+                <?php echo $this->layout()->content ?>
+            </div>
+        </div>
+        <div class="block">
+            <div id="zfFooter" class="span-24">
+                <p>Copyright &copy;2011 Andreas Mairhofer</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

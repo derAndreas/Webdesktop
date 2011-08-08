@@ -1,0 +1,63 @@
+<h2>List all actions for the controller <?= $this->controller->get('moduleName'); ?>/<?=$this->controller->get('controllerName'); ?> from the database.</h2>
+<p>
+    This listing only shows the actions from the database. New or vanished actions need to be scanned.
+</p>
+<p>
+    <?= $this->partial('partials/linkBackController.phtml',
+                        array('control' => $this->controller->get('id'), 'virtual' => $this->controller->get('virtual'))); ?>
+    <br/>
+    <a href="<?= $this->url(array(
+        'module'  => 'admin',
+        'controller' => 'action',
+        'action'  => 'scan',
+        'control' => $this->controller->get('id'),
+        'virtual' => $this->controller->get('virtual')
+    ));?>">scan actions for this controller</a>
+</p>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>id</th> -->
+            <th>action</th>
+            <th>active</th>
+            <th>&nbsp;</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->actions AS $action): ?>
+        <tr>
+            <!-- <td><?= $action->get('id'); ?></td> -->
+            <td><?= $action->get('actionName'); ?></td>
+            <td><?= $action->get('enabled') == 1 ? 'yes' : 'no'; ?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'action',
+                    'action' => 'edit',
+                    'id' => $action->get('id'),
+                    'virtual' => $this->controller->get('virtual')
+                ));?>">Edit</a>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'action',
+                    'action' => 'status',
+                    'id' => $action->get('id'),
+                    'virtual' => $this->controller->get('virtual')
+                ));?>">Change Status</a>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'action',
+                    'action' => 'permission',
+                    'id' => $action->get('id'),
+                    'virtual' => $this->controller->get('virtual')
+                ));?>">Permission</a>
+            </td>
+            <td><?= $this->escape($action->get('description')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>
+
+<?= $this->partial('partials/linkBackController.phtml',
+                    array('control' => $this->controller->get('id'), 'virtual' => $this->controller->get('virtual'))); ?>

@@ -1,0 +1,13 @@
+/* 
+    This is the bootstrap css file, which only contains declerations like
+    shortcut icon and so on.
+    If the module controller is loaded, it is possible to load other css files
+    with exact definitions
+*/
+
+.settings-icon {
+    background-image: url("../../images/settings/settings-icon-16x16.png") !important;
+}
+.settings-shortcut {
+    background-image: url("../../images/settings/settings-icon-48x48.png") !important;
+}

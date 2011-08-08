@@ -1,0 +1,10 @@
+<dd title="<?= $this->file; ?>"><?= ucfirst($this->name) ?>
+	<small>
+	<a href="<?=$this->url(array(
+        'module' => 'admin',
+        'controller' => 'controllers',
+        'action' => 'enableController',
+        'name' => $this->module . '_' . $this->name
+    ));?>">enable</a>
+	</small>
+</dd>

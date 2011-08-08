@@ -1,0 +1,14 @@
+<h2>Add an Action to the Database</h2>
+
+<p class="box">
+    <b>Notice!</b><br/>
+    If you add the action, the action is not activated and no user has access to the action.<br/>
+    You need to specify the permissions for each action induvidually.
+</p>
+
+<?= $this->partial('partials/linkBackAction.phtml',  array('control' => $this->controller->get('id'))); ?>
+
+<?= $this->form; ?>
+
+<div class="clear" />
+<?= $this->partial('partials/linkBackAction.phtml',  array('control' => $this->controller->get('id'))); ?>

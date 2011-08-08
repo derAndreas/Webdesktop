@@ -1,0 +1,57 @@
+<h2>List of all defined roles</h2>
+
+<p>
+<a href="<?= $this->url(array(
+    'module' => 'admin',
+    'controller' => 'role',
+    'action' => 'add'
+));?>">Create a new Role</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <!-- <th>id</th> -->
+            <th>name</th>
+            <th>activated</th>
+            <th>group</th>
+            <th>user</th>
+            <th>roles</th>
+            <th>&nbsp;</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->roles AS $role): ?>
+        <tr>
+            <!-- <td><?= $role->get('id'); ?></td> -->
+            <td><?= $role->get('name'); ?></td>
+            <td><?= $role->get('enabled') == 1 ? 'yes' : 'no'; ?></td>
+            <td><?= $role->groups; ?></td>
+            <td><?= $role->users; ?></td>
+            <td><?= $role->roles; ?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'role',
+                    'action' => 'edit',
+                    'id' => $role->get('id')
+                ));?>" title="Edit">Edit</a>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'role',
+                    'action' => 'status',
+                    'id' => $role->get('id')
+                ));?>" title="Change status">Change status</a>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'role',
+                    'action' => 'info',
+                    'id' => $role->get('id')
+                ));?>" title="Informations">Info</a>
+            </td>
+            <td><?= $this->escape($role->get('description')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>

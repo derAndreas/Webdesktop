@@ -1,0 +1,29 @@
+<h2>Scan Results for Controllers in the Module Controller directories</h2>
+
+<a href="<?= $this->url(array(
+    'module' => 'admin',
+    'controller' => 'controller',
+    'action' => 'index'
+));?>"><< back</a>
+
+<?= $this->partial('partials/controller/scanTable.phtml',
+                    array(
+                        'data' => $this->vanished,
+                        'title' => 'Vanished Controllers',
+                        'actionMethod' => 'delete',
+                        'linkText' => 'Delete from database'
+                    )); ?>
+
+<?= $this->partial('partials/controller/scanTable.phtml',
+                    array(
+                        'data' => $this->new,
+                        'title' => 'New Controllers',
+                        'actionMethod' => 'add',
+                        'linkText' => 'Add to database'
+                    )); ?>
+
+<a href="<?= $this->url(array(
+    'module' => 'admin',
+    'controller' => 'controller',
+    'action' => 'index'
+));?>"><< back</a>

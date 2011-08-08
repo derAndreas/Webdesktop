@@ -1,0 +1,31 @@
+<h2>Scanned and detected Actions</h2>
+<p>
+    For the Module <b><?= $this->controller->get('moduleName'); ?></b> -
+    Controller <b><?= $this->controller->get('controllerName') ?></b> the following actions were discovered.<br/>
+    Please check, which Actions should be written in the database.
+</p>
+<?= $this->partial('partials/linkBackController.phtml',
+                    array('control' => $this->controller->get('id'), 'virtual' => $this->controller->get('virtual'))); ?>
+
+<?= $this->partial('partials/action/scanTable.phtml', 
+                    array(
+                        'data' => $this->vanished,
+                        'title' => 'Vanished Actions',
+                        'actionMethod' => 'delete',
+                        'linkText' => 'Delete from database'
+                    )); ?>
+
+<?= $this->partial('partials/action/scanTable.phtml',
+                    array(
+                        'data' => $this->new,
+                        'title' => 'New Actions',
+                        'actionMethod' => 'add',
+                        'linkText' => 'Add to database'
+                    )); ?>
+
+<a href="<?= $this->url(array(
+    'module'     => 'admin',
+    'controller' => 'action',
+    'action'     => 'index',
+    'control'    => $this->controller->get('id')
+));?>"><< Back</a>

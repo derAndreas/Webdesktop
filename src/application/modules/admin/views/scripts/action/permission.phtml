@@ -1,0 +1,17 @@
+<h2>Permissions to access this action</h2>
+
+<h3>Check the roles that should have (no) access to this action </h3>
+<p class="notice">
+    Select the roles that should have access to this resource.
+    Unchecked roles automaticly do not have any access (Implicit Deny Rule).
+    It is also possible to explicit deny access. This is usefull if roles inherit rights
+    from a parent role and some child roles should not have access. This increase the level
+    of maintain the rolesystem.
+</p>
+
+<?= $this->partial('partials/linkBackAction.phtml',  array('control' => $this->controller->get('id'))); ?>
+
+<?= $this->form; ?>
+
+<div class="clear" />
+<?= $this->partial('partials/linkBackAction.phtml',  array('control' => $this->controller->get('id'))); ?>

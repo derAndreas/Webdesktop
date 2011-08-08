@@ -1,0 +1,43 @@
+<h3><?= $this->title; ?></h3>
+<?php IF($this->data !== FALSE && count($this->data) > 0): ?>
+<table>
+    <thead>
+        <tr>
+            <!-- <th>id</th> -->
+            <th>module</th>
+            <th>controller</th>
+            <th>active</th>
+            <th>virtual</th>
+            <th>&nbsp;</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->data AS $controller): ?>
+        <tr>
+            <!-- <td><?= $controller->get('id'); ?></td> -->
+            <td><?= $controller->get('moduleName'); ?></td>
+            <td><?= $controller->get('controllerName'); ?></td>
+            <td><?= $controller->get('enabled') === 1 ? 'yes' : 'no'; ?></td>
+            <td><?= $controller->get('virtual') === 1 ? 'yes' : 'no'; ?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'module'     => 'admin',
+                    'controller' => 'controller',
+                    'action'     => $this->actionMethod,
+                    'modul'      => $controller->get('moduleName'),
+                    'control'    => $controller->get('controllerName'),
+                    'id'         => $controller->get('id'),
+                    'virtual'    => $controller->get('virtual')
+                ));?>"><?= $this->linkText; ?></a>
+            </td>
+            <td><?= $this->escape($controller->get('description')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>
+<?php ELSE: ?>
+<p class="notice">
+    There are no <?= $this->title; ?>
+</p>
+<?php ENDIF; ?>

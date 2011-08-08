@@ -1,0 +1,93 @@
+<h2>Detailanzeige zur einer Rolle</h2>
+<p>
+<a href="<?= $this->url(array(
+    'module' => 'admin',
+    'controller' => 'role',
+    'action' => 'index'
+));?>"><< Back</a>
+<a href="<?= $this->url(array(
+    'module' => 'admin',
+    'controller' => 'role',
+    'action' => 'edit',
+    'id' => $this->role->get('id')
+));?>">Edit</a>
+</p>
+
+<table>
+    <thead>
+        <th colspan="2">General informations about the role</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Id</b></td>
+            <td><?= $this->role->get('id'); ?></td>
+        </tr>
+        <tr>
+            <td><b>Name</b></td>
+            <td><?= $this->role->get('name'); ?></td>
+        </tr>
+        <tr>
+            <td><b>Aktiviert</b></td>
+            <td><?= $this->role->get('enabled') == 1 ? 'yes' : 'no'; ?></td>
+        </tr>
+        <tr>
+            <td><b>Beschreibung</b></td>
+            <td><?= $this->escape($this->role->get('description')); ?></td>
+        </tr>
+        <tr>
+            <td><b>Rolle erbt Rechte von Rolle</b></td>
+            <td>
+            <?php IF(count($this->inherits) > 0):
+                    FOREACH($this->inherits AS $inRole): ?>
+                    <a href="<?= $this->url(array(
+                        'module' => 'admin',
+                        'controller' => 'role',
+                        'action' => 'info',
+                        'id' => $inRole->get('id')
+                    ));?>"><?= $this->escape($inRole->get('name')); ?></a>
+                    <?php ENDFOREACH; ?>
+                <?php ELSE: ?>
+                None
+                <?php ENDIF; ?>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr/>
+<h3>Groups that are assigned to this role</h3>
+<table>
+    <thead>
+        <!-- <th>id</th> -->
+        <th>name</th>
+        <th>description</th>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->groups AS $group): ?>
+        <tr>
+            <!-- <td><?= $group->get('id'); ?></td> -->
+            <td><?= $group->get('name'); ?></td>
+            <td><?= $this->escape($group->get('description')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>
+<hr/>
+
+
+<h3>Users that are assigned to this role</h3>
+<table>
+    <thead>
+        <!-- <th>id</th> -->
+        <th>name</th>
+        <th>description</th>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->users AS $user): ?>
+        <tr>
+            <!-- <td><?= $user->get('id'); ?></td> -->
+            <td><?= $user->get('name'); ?></td>
+            <td><?= $this->escape($user->get('email')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>

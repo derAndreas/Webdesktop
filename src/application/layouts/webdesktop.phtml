@@ -1,0 +1,22 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>WebDesktop Application</title>
+        <script type="text/javascript">
+            // #fixme: user login state and init scripts here
+            GLOBAL_USER_LOGGED_IN = true;
+            <?php echo $this->layout()->content ?>
+        </script>
+        <?php
+            $this->headLink()->appendStylesheet('resources/css/ext-all.css', 'screen', true, array('id' => 'user-style-theme'))
+                             ->appendStylesheet('resources/css/webdesktop.css')
+                             ->appendStylesheet('resources/css/Ext.ux/CheckColumn.css');
+            $this->headScript()->appendFile('lib/Ext/ext-all-debug.js', 'text/javascript')
+                               ->appendFile('lib/Ext.ux/Overwrite.js', 'text/javascript')
+                               ->appendFile('app/app.js', 'text/javascript');
+            echo $this->headLink(), $this->headScript();
+        ?>
+    </head>
+    <body></body>
+</html>

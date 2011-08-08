@@ -1,0 +1,27 @@
+<h2>Administration of WebDesktop Modules</h2>
+<p>
+    Here you can install, remove, change or disable a WebDesktopModule.
+</p>
+<p>
+    What do you wanna do?
+</p>
+
+<a href="<?= $this->url(array(
+    'module' => 'webdesktop',
+    'controller' => 'admin',
+    'action' => 'install'
+));?>">Install a Module</a>
+
+<a href="<?= $this->url(array(
+    'module' => 'webdesktop',
+    'controller' => 'admin',
+    'action' => 'remove'
+));?>">Remove a Module</a>
+
+<a href="<?= $this->url(array(
+    'module' => 'webdesktop',
+    'controller' => 'admin',
+    'action' => 'disbable'
+));?>">Disable a Module</a>
+
+<h3>List of all known Modules</h3>

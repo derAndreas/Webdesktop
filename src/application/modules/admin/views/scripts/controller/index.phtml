@@ -1,0 +1,51 @@
+<h2>List all Module/Controller combinations from the database</h2>
+<p>
+<a href="<?= $this->url(array(
+    'module' => 'admin',
+    'controller' => 'controller',
+    'action' => 'scan'
+));?>">Scan Controllers</a>
+</p>
+<table>
+    <thead>
+        <!-- <th>Id</th> -->
+        <th>Module</th>
+        <th>Controller</th>
+        <th>Active</th>
+        <th>Virtual</th>
+        <th>&nbsp;</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+    <?PHP FOREACH($this->controllers AS $controller): ?>
+        <tr>
+            <!-- <td><?= $controller->get('id'); ?></td> -->
+            <td><?= $controller->get('moduleName'); ?></td>
+            <td><?= $controller->get('controllerName'); ?></td>
+            <td><?= $controller->get('enabled') == 1 ? 'yes' : 'no'; ?></td>
+            <td><?= $controller->get('virtual') == 1 ? 'yes' : 'no'; ?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'controller',
+                    'action' => 'edit',
+                    'id' => $controller->get('id')
+                ));?>">Edit</a>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'controller',
+                    'action' => 'status',
+                    'id' => $controller->get('id')
+                ));?>">Status</a>
+                <a href="<?= $this->url(array(
+                    'module' => 'admin',
+                    'controller' => 'action',
+                    'action' => 'index',
+                    'control' => $controller->get('id')
+                ));?>">List Actions</a>
+            </td>
+            <td><?= $this->escape($controller->get('description')); ?></td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>

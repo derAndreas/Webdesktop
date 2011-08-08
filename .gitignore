@@ -1,0 +1,4 @@
+src/application/configs/application.ini
+src/application/configs/webdesktop.ini
+src/data/cache/*
+src/data/logs/*

@@ -1,0 +1,39 @@
+<h2>List all existing groups</h2>
+<p>
+    <a href="<?= $this->url(array(
+        'module'     => 'admin',
+        'controller' => 'group',
+        'action'     => 'add'
+    )) ?>">Add New Group</a>
+</p>
+
+<table>
+    <thead>
+        <!-- <th>id</th> -->
+        <th>name</th>
+        <th>&nbsp;</th>
+    </thead>
+    <tbody>
+    <?php FOREACH($this->groups AS $group): ?>
+        <tr>
+            <!-- <td><?= $group->get('id');?></td> -->
+            <td><?= $group->get('name');?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'group',
+                            'action'     => 'edit',
+                            'id'         => $group->get('id')
+                )) ?>">Edit</a>
+                  |
+                <a href="<?= $this->url(array(
+                            'module'     => 'admin',
+                            'controller' => 'group',
+                            'action'     => 'delete',
+                            'id'         => $group->get('id')
+                )) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php ENDFOREACH; ?>
+    </tbody>
+</table>

@@ -1,0 +1,196 @@
+
+/*----------------------------------------------------
+    Start Button
+*/
+
+.ux-start-button-icon {
+    background-image: url(../images/taskbar/sencha.gif) !important;
+    background-color: transparent;
+}
+
+.ux-start-button .x-btn-arrow {
+    background-image: none;
+}
+
+.ux-start-button .x-btn-arrow-right {
+    padding-left: 10px;
+}
+
+.ux-taskbar {
+    padding-left: 4px !important;
+}
+
+/*
+    Start Button (Black)
+*/
+
+.ux-desktop-black .ux-start-button {
+    height: 28px;
+    padding: 0px;
+    display: block;
+}
+
+.ux-desktop-black .ux-start-button em {
+    margin-top: 5px;
+}
+
+.ux-desktop-black .ux-start-button .x-btn-inner {
+    color: black;
+    font-size:11px;
+    font-weight: bold;
+}
+
+.ux-desktop-black .ux-start-button {
+    background-image: -moz-linear-gradient(center top , #E4F3FF, #D9EDFF 48%, #C2D8F2 52%, #C6DCF6);
+    border-radius: 8px 8px 8px 8px;
+    border-color: #81A4D0;
+}
+
+/*----------------------------------------------------
+    Start Menu
+*/
+
+.ux-start-menu-toolbar .x-btn-inner {
+    text-align: left;
+}
+
+.ux-start-menu-toolbar {
+    padding: 4px !important;
+}
+
+/*----------------------------------------------------
+    TaskBar
+*/
+
+.ux-taskbar .x-toolbar {
+    background: transparent none;
+    border-color: transparent;
+    border: 0px;
+}
+
+.x-ie6 .ux-taskbar .x-toolbar {
+    border-color: #d3e1f1;
+}
+
+.ux-desktop-windowbar .x-btn-inner,
+.x-nbr .ux-desktop-windowbar .x-btn-icon-text-left button {
+    text-align: left !important;
+}
+
+.ux-taskbar .x-toolbar {
+    height: 28px;
+}
+
+.ux-taskbar {
+    height: 28px;
+    padding: 0;
+}
+
+.x-toolbar .x-toolbar {
+    padding: 0;
+}
+
+/*
+    TaskBar (Black)
+*/
+
+.ux-desktop-black .ux-taskbar {
+    background: transparent url('../images/taskbar/black/taskbar-start-panel-bg.gif') repeat-x left top;
+    border-color: transparent;
+    /*height: 30px;*/
+}
+
+.ux-desktop-black .ux-taskbar .x-splitter {
+    background: transparent url(../images/taskbar/black/taskbar-split-h.gif) no-repeat scroll 0 -2px;
+}
+
+.ux-desktop-black .ux-taskbar .x-toolbar-text {
+    color: white !important;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-default-toolbar-small-over {
+    background-color: yellow;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-inner {
+    color: white;
+}
+
+.ux-desktop-black .ux-taskbar .x-btn-pressed .x-btn-inner, .ux-taskbar .x-btn-over .x-btn-inner {
+    color: black;
+}
+
+/*----------------------------------------------------
+    Tray Clock
+*/
+
+.ux-desktop-trayclock {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/*----------------------------------------------------
+    Desktop DataView
+*/
+
+.ux-wallpaper {
+    background-color: #3d71b8;
+    position: absolute;
+}
+
+.ux-wallpaper-tiled {
+    background-repeat: repeat;
+}
+
+.ux-desktop-shortcut {
+    float: left;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px;
+    margin: 8px;
+    width: 64px;
+}
+
+.ux-desktop-shortcut-icon {
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.ux-desktop-shortcut-text {
+    font: normal 10px tahoma,arial,verdana,sans-serif;
+    text-decoration: none;
+    padding-top: 5px;
+    color: white;
+}
+
+.x-view-over .ux-desktop-shortcut-text {
+    text-decoration: underline;
+}
+
+.ux-desktop-active-win {
+}
+.ux-desktop-inactive-win {
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+    opacity: 0.6;
+}
+
+/** GENERAL ICONS */
+
+.ux-icon-reload { background-image: url("../images/reload.gif") !important; }
+.ux-icon-password { background-image: url("../images/password.png") !important; }
+.ux-icon-add { background-image: url("../images/add.png") !important; }
+.ux-icon-accept { background-image: url("../images/accept.png") !important; }
+.ux-icon-cancel { background-image: url("../images/stop.gif") !important; }
+.ux-icon-user-add { background-image: url("../images/user_add.png") !important; }
+.ux-icon-user-delete { background-image: url("../images/user_delete.png") !important; }
+.ux-icon-user-edit { background-image: url("../images/user_edit.png") !important; }
+.ux-icon-group-add { background-image: url("../images/group_add.png") !important; }
+.ux-icon-group-delete { background-image: url("../images/group_delete.png") !important; }
+.ux-icon-group-edit { background-image: url("../images/group_edit.png") !important; }
+.ux-color-red {
+    color: red;
+}

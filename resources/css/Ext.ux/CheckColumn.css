@@ -1,0 +1,15 @@
+.x-grid-checkcolumn {
+    height: 14px;
+    background-image: url("../../images/Ext.ux/CheckColumn/unchecked.gif");
+    background-position: 50% -2px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.x-grid-checkcolumn-checked {
+    background-image: url("../../images/Ext.ux/CheckColumn/checked.gif");
+}
+
+.x-grid-checkcolumn-editor .x-form-cb-wrap {
+    text-align: center;
+}

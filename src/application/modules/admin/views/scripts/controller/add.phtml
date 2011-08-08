@@ -1,0 +1,15 @@
+<h2>Add an Controller to the Database</h2>
+
+<p class="box">
+    <b>Notice!</b><br/>
+    If you add the controller, the controller is not activated and no user has access to the actions
+    of this specific controller. You need to specify the permissions for each action induvidually.
+</p>
+
+<?= $this->form; ?>
+
+<a href="<?= $this->url(array(
+    'module'     => 'admin',
+    'controller' => 'controller',
+    'action'     => 'scan'
+));?>"><< Back</a>

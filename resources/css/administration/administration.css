@@ -1,0 +1,13 @@
+
+.module-administration .icon-users {
+    background-image: url("../../images/administration/icon-users.png") !important;
+}
+.module-administration .icon-groups {
+    background-image: url("../../images/administration/icon-groups.png") !important
+}
+.module-administration .icon-roles {
+    background-image: url("../../images/administration/icon-roles.png") !important
+}
+.module-administration .icon-controllers {
+    background-image: url("../../images/administration/icon-controllers.png") !important
+}

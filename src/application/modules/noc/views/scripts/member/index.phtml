@@ -1,0 +1,31 @@
+<h2>Select the following application to run</h2>
+
+<a href="<?= $this->url(array(
+                        'module'     => 'webdesktop',
+                        'controller' => 'index',
+                        'action'     => 'index'
+                        ),
+                        'default', true
+                    );
+                 ?>
+                 ">
+    <div class="member-launch">
+        <h3>Webdesktop</h3>
+        Launch
+    </div>
+</a>
+<a href="<?= $this->url(array(
+                        'module'     => 'admin',
+                        'controller' => 'index',
+                        'action'     => 'index'
+                        ),
+                        'default', true
+                    );
+                 ?>
+                 ">
+    <div class="member-launch">
+        <h3>Administration</h3>
+        Launch
+    </div>
+</a>
+<div style="display: block; clear:both;"/>

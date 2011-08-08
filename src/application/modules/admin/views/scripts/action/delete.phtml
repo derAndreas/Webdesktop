@@ -1,0 +1,13 @@
+<h2>Delete an Action from the Database</h2>
+<p class="notice">
+    <b>Attention!</b><br/>
+    Deleting an Action could cause major problems. If you delete the action to add an action, you need server access to repair!<br/>
+    If you really want to delete this action, please confirm your doing.
+</p>
+
+<?= $this->partial('partials/linkBackAction.phtml',  array('control' => $this->controller->get('id'))); ?>
+
+<?= $this->form; ?>
+
+<div class="clear" />
+<?= $this->partial('partials/linkBackAction.phtml',  array('control' => $this->controller->get('id'))); ?>
