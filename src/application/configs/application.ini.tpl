@@ -19,13 +19,13 @@ resources.layout.layoutPath = APPLICATION_PATH "/layouts"
 resources.modules[] =
 resources.session.name = "webdesktop"
 ;default db adapter
-resources.db.password_salt = 
+resources.db.password_salt = "PASSWORD_SALT"
 resources.db.adapter = "PDO_MYSQL"
 resources.db.isdefaulttableadapter = true
-resources.db.params.dbname = <CHANGEHERE> 
-resources.db.params.username = <CHANGEHERE> 
-resources.db.params.password = <CHANGEHERE> 
-resources.db.params.hostname = "localhost"
+resources.db.params.dbname = !DBNAME
+resources.db.params.username = !DBUSER
+resources.db.params.password = !DBPASS
+resources.db.params.hostname = !DBHOST
 resources.db.params.driver_options.1002 = "SET NAMES UTF8;"
 
 ; need a default user so that ACL does not run into infinite loop

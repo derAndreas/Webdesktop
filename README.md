@@ -13,6 +13,17 @@ It is used as a sample project to use the MVC pattern from ExtJs4 and ZendFramew
 * Download ExtJs4 and Zend Framework
     * Extract ExtJs4 in the folder lib/Ext/
     * Extract Zend Framework in the folder src/library/Zend/
+    
+Now there are two ways:
+
+First:
+
+* open a shell and go to the installer directory
+* edit the 5 variables at the top (path, db credentials)
+* run "php setup.php"
+
+Second (manually):
+
 * Edit the configuration files
 * Create a MySQL Database and import the db structure
 * Secure your configuration files! (see Security)
@@ -52,7 +63,7 @@ An other way is to change the permissons on the ./src folder with chmod.
 
 
 ### More Informations ###
-*todo*
+The installation script is just a very quick one and should be seen as a temporary solution.
 
 
 
