@@ -1,13 +1,39 @@
 <?php
 /**
- * Description of Role
+ * Definition of a Role in the application
  *
- * @author Andreas
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @subpackage App_Acl
+ * @namespace App_Acl
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_Acl_Role
  */
 class App_Acl_Role implements Zend_Acl_Role_Interface {
 
-    protected $roleId;
-    protected $roleName;
+    /**
+     * Id of the Role
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * Name of the role
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Parent roles of the current role
+     *
+     * @var array
+     */
     protected $parentRoles = array();
 
     /**
@@ -15,12 +41,11 @@ class App_Acl_Role implements Zend_Acl_Role_Interface {
      *
      * @param int $id
      * @param string $name
-     * @access public
      */
     public function __construct($id, $name)
     {
-        $this->roleId = $id;
-        $this->roleName = (string) $name;
+        $this->id   = $id;
+        $this->name = (string) $name;
     }
 
     /**
@@ -28,7 +53,6 @@ class App_Acl_Role implements Zend_Acl_Role_Interface {
      *
      * @param App_Acl_Role $role
      * @return App_Acl_Role $this
-     * @access public
      */
     public function addParentRole(App_Acl_Role $role)
     {
@@ -41,44 +65,41 @@ class App_Acl_Role implements Zend_Acl_Role_Interface {
      * Get the Parent Role objects
      *
      * @return array
-     * @access public
      */
     public function getParentRole()
     {
-        RETURN (array) $this->parentRoles;
+        RETURN $this->parentRoles;
     }
 
     /**
+     * Return bool if Role has parent roles
      *
-     * @return
-     * @access public
+     * @return bool
      */
     public function hasParentRole()
     {
-        RETURN (bool) count($this->parentRoles) > 0 ? FALSE : TRUE;
+        RETURN count($this->parentRoles) > 0 ? FALSE : TRUE;
     }
 
     /**
      * Return the role id
-     *
+     * Interface implementation
+     * 
      * @return string
-     * @access public
      */
     public function getRoleId()
     {
-        RETURN (string) $this->roleId;
-        #RETURN (string) $this->roleName;
+        RETURN $this->id;
     }
 
     /**
      * Get the role name
      *
      * @return string
-     * @access public
      */
     public function getName()
     {
-        RETURN (string) $this->roleName;
+        RETURN $this->name;
     }
 
     /**
@@ -86,11 +107,10 @@ class App_Acl_Role implements Zend_Acl_Role_Interface {
      *
      * @param string $name
      * @return App_Acl_Role $this
-     * @access public
      */
     public function setName($name)
     {
-        $this->roleName = (string) $name;
+        $this->name = (string) $name;
         RETURN $this;
     }
 

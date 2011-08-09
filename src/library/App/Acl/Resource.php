@@ -1,8 +1,18 @@
 <?php
 /**
- * Description of Resource
+ * Definition of a ressource in the application
  *
- * @author Andreas
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @subpackage App_Acl
+ * @namespace App_Acl
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_Acl_Resource
  */
 class App_Acl_Resource implements Zend_Acl_Resource_Interface {
     /**
@@ -10,25 +20,24 @@ class App_Acl_Resource implements Zend_Acl_Resource_Interface {
      *
      * @var string
      */
-    protected $resourceId;
+    protected $id;
     /**
      * the resource name
      * 
      * @var string
      */
-    protected $resourceName;
+    protected $name;
 
     /**
      * construct a resource
      *
      * @param int $id
      * @param string $name
-     * @access public
      */
     public function __construct($id, $name)
     {
-        $this->resourceId = $id;
-        $this->resourceName = (string) $name;
+        $this->id   = $id;
+        $this->name = (string) $name;
     }
 
     /**
@@ -36,11 +45,10 @@ class App_Acl_Resource implements Zend_Acl_Resource_Interface {
      *
      * @param string $name
      * @return App_Acl_Resource $this
-     * @access public
      */
     public function setName($name)
     {
-        $this->resourceName = (string) $name;
+        $this->name = (string) $name;
 
         RETURN $this;
     }
@@ -49,23 +57,21 @@ class App_Acl_Resource implements Zend_Acl_Resource_Interface {
      * Get the resoruce name
      *
      * @return string
-     * @access public
      */
     public function getName()
     {
-        RETURN (string) $this->resourceName;
+        RETURN $this->name;
     }
     
     /**
      * get the resource identifier
+     * Interface implementation
      * 
      * @return string
-     * @access public
      */
     public function getResourceId() 
     {
-        RETURN (string) $this->resourceName;
+        RETURN (string) $this->name;
     }
-
 }
 ?>

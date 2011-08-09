@@ -1,8 +1,21 @@
 <?php
 /**
- * Description of User
+ * Definition for a user in the application.
  *
- * @author Andreas
+ * Used in the backend for all ACL actions.
+ *
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @namespace App_
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_User
+ * @todo I think the system changed so much, that this needs to be refactored.
+ *       especially the update method seems odd
  */
 class App_User {
     /**
@@ -39,7 +52,6 @@ class App_User {
     /**
      * get the user id
      * @return integer
-     * @access public
      */
     public function getId()
     {
@@ -48,7 +60,6 @@ class App_User {
     /**
      * get the user full name
      * @return string
-     * @access public
      */
     public function getName()
     {
@@ -57,7 +68,6 @@ class App_User {
     /**
      * get the users email address
      * @return string
-     * @access public
      */
     public function getEmail()
     {
@@ -66,7 +76,6 @@ class App_User {
     /**
      * get the user groupd id
      * @return integer
-     * @access public
      */
     public function getGroupId()
     {
@@ -77,7 +86,6 @@ class App_User {
      *
      * @param integer $id
      * @return App_User $this
-     * @access public
      */
     public function setId($id)
     {
@@ -92,7 +100,6 @@ class App_User {
      *
      * @parm string $name
      * @return App_User $this
-     * @access public
      */
     public function setName($name)
     {
@@ -107,7 +114,6 @@ class App_User {
      *
      * @param string $mail
      * @return App_User $this
-     * @access public
      * @todo check the user email format
      */
     public function setEmail($mail)
@@ -123,7 +129,6 @@ class App_User {
      *
      * @param integer $groupid
      * @return App_User $this
-     * @access public
      * @todo check if group exists or extend with a ::setGroup(App_Group $group) method
      */
     public function setGroupId($groupid)
@@ -140,7 +145,6 @@ class App_User {
      *
      * @param string $name
      * @return App_User $this
-     * @access public
      */
     public function setGroupName($name)
     {
@@ -156,7 +160,6 @@ class App_User {
      *
      * @param integer $id database user id
      * @return App_User $this
-     * @access public
      */
     public function update($id)
     {
@@ -190,7 +193,6 @@ class App_User {
      * @param string|array $role
      * @param int $id if $role param is a string, we can pass the id
      * @return App_User $this
-     * @access public
      */
     public function setRole($role, $id = 0)
     {

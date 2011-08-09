@@ -1,20 +1,48 @@
 <?php
 /**
- * Description of Acl
+ * Database Model for the Table "user_acl_rules" containing defined Users
  *
- * @author Andreas
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @subpackage Model_DbTable
+ * @namespace App_Model_DbTable
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_Model_DbTable_Acl
+ * @extends Zend_Db_Table_Abstract
+ * @todo refactor for consistency in the variable and method names
+ *          - $stmt / $select for SQL Statements
+ *          - find/fetch/get Method names for retrieving informations from the Db
  */
 class App_Model_DbTable_Acl extends Zend_Db_Table_Abstract {
 
-    // use some acl tablename to get the table model work
-    // easier for handling than fetching default db adapter from zend_registry
+    /**
+     * Table name
+     * @var string
+     */
     protected $_name = 'user_acl_rules';
+    /**
+     * primary key
+     * @var string
+     */
+    protected $_primaray = 'uaru_id';
+
 
     /**
-     * Get the Resources
+     * Get the ResourceId for a module/controller
      *
-     * @return Zend_Db_Rowset
-     * @access public
+     * Get the Id from module/controller combination from the databse
+     *
+     * @param string $module
+     * @param string $controller
+     * @param bool $loadVirtual
+     * @return int|false
+     * @todo refactor: return the row(use fetchRow and not fetchAll),
+     *       check where used and change value handling there too
      */
     public function getResourceId($module, $controller, $loadVirtual = NULL)
     {
@@ -35,13 +63,13 @@ class App_Model_DbTable_Acl extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Get the parent role
+     * Get the parent roles
      *
      * @param int $roleId
      * @return array
-     * @access public
      * @todo remove uar_inherit from the roles. legacy code, when only 1 role inheritance was possible!
      *       Also delete this from the Db (user_acl_roles)
+     * @todo rewrite
      */
     public function getParentRoles($roleId)
     {
@@ -67,7 +95,7 @@ class App_Model_DbTable_Acl extends Zend_Db_Table_Abstract {
      * @param int $resourceId
      * @param array $roles array with App_Acl_Roles
      * @return array
-     * @access public
+     * @todo rewrite
      */
     public function getRules($resourceId, $roles)
     {
@@ -92,14 +120,13 @@ class App_Model_DbTable_Acl extends Zend_Db_Table_Abstract {
                      ->where('uaru_uar_id IN (' . implode(', ', $roleIds) . ')');
 
         $result = $this->getAdapter()->fetchAll($stmt);
-        #var_dump($stmt->__toString());
         RETURN $result;
     }
 
     /**
+     * Get a role by the name
      *
      * @return
-     * @access public
      * @deprecated
      */
     public function getRoleByName($name)

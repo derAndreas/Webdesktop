@@ -1,29 +1,37 @@
 <?php
 /**
- * Description of Db
+ * Strategy to authenticate a user against the database
  *
- * @author Andreas
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @subpackage App_Auth
+ * @namespace App_Auth_Strategy
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_Auth_Strategy_Db
  */
 class App_Auth_Strategy_Db {
     /**
-     * contains the Zend_Form for this strategy
-     *
-     * @access protected
+     * Zend_Form for this strategy
      * @var Zend_Form
      */
     protected $form;
     /**
      * reference link to the Auth_Adapter
-     *
-     * @access protected
      * @var App_Auth_Adapter
      */
     protected $adapter;
+
     /**
      * Authentication method
      *
      * @return Zend_Auth_Result
-     * @access public
+     * @todo Db Col in code, use something like Admin_Model_DbRow_User, but this needs
+     *       to be rewritten to be in the App_ namespace
      */
     public function authenticate()
     {
@@ -40,18 +48,20 @@ class App_Auth_Strategy_Db {
             'MD5(CONCAT(?, "' . $salt . '"))'
         );
 
-        $internalAdapter->setIdentity($user)
-                        ->setCredential($pass);
-
-        $result = $internalAdapter->authenticate();
-
+        $result = $internalAdapter->setIdentity($user)
+                        ->setCredential($pass)
+                        ->authenticate();
+        
         IF($result->isValid()) {
             $data = (array) $internalAdapter->getResultRowObject();
             $this->adapter->getUser()->update($data['uu_id']);
         }
         
-        RETURN new Zend_Auth_Result($result->getCode(), $this->adapter->getUser(), $result->getMessages());
-
+        RETURN new Zend_Auth_Result(
+                $result->getCode(),
+                $this->adapter->getUser(),
+                $result->getMessages()
+        );
     }
 
     /**
@@ -60,7 +70,6 @@ class App_Auth_Strategy_Db {
      * creates the form (from App/Form/Auth/Login<strategy>
      *
      * @return Zend_Form
-     * @access public
      */
     public function getForm()
     {
@@ -72,18 +81,15 @@ class App_Auth_Strategy_Db {
     }
 
     /**
-     * set the reference link for the App_Auth_Adapter
+     * set the reference for the App_Auth_Adapter
      *
      * @param App_Auth_Adapter $adapter
-     * @return App_Auth_Strategy_Db $this for method chaining
-     * @access public
+     * @return App_Auth_Strategy_Db $this
      */
     public function setAdapter(App_Auth_Adapter $adapter)
     {
         $this->adapter = $adapter;
-        
         RETURN $this;
     }
-
 }
 ?>

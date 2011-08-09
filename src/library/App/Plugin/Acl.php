@@ -1,16 +1,32 @@
 <?php
 /**
- * Description of Acl
+ * Controller Plugin to hook in the ACL in the controller dispatching
  *
- * @author Andreas
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @subpackage App_Plugin
+ * @namespace App_Plugin
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
  */
-class App_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
+
+/**
+ * @class App_Plugin_Acl
+ * @extends Zend_Controller_Plugin_Abstract
+ * @todo set the response right: currently if there is an error somewhere (PHP error)
+ *         - the error message is prepend to the php error in the response (makes it impossible to read on frontendside!)
+ *         - on non xml requests: user is just routed to login page, without any information
+ *          => critical Bug, needs to be fixed in the next releases (in preDispatch)
+ * @todo ACL does not work after update of rules. Need to update (or delete) the ACL Cache after changing rules
+ */
+class App_Plugin_Acl extends Zend_Controller_Plugin_Abstract
+{
     /**
      * Query the ACL if the user is allowed to be dispatched to the resource
      *
      * @param Zend_Controller_Request_Abstract $request
      * @throws Zend_Exception if user is not allowed (handled by error controller)
-     * @access public
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request) {
         $module     = $request->getModuleName();
@@ -60,6 +76,15 @@ class App_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
             }
         }
 
+        /**
+         * This part is critical (see todo in class docs)
+         *
+         * 1. On XML Requests:
+         *      The setbody just adds information to the body. If an php error occure, the
+         *      setBody just prepend the this error to the php error => the return is an Json/html mixed response, unreadable for Ajax Client
+         * 2. normal HTTP resposen:
+         *      anonymouse rerouting to login page, no reason or any notification to the user
+         */
         IF($this->getRequest()->isXmlHttpRequest()) {
             $this->getResponse()->setBody(Zend_Json_Encoder::encode(array('success' => FALSE, 'error_message' => 'No Right to execute this action')));
         } ELSEIF($controller !== 'error') {

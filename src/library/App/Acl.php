@@ -1,55 +1,68 @@
 <?php
 /**
- * Description of Acl
+ * Main ACL to load the ressources and validate a request against the ACL
  *
- * @author Andreas
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @namespace App_Acl
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_Acl
+ * @extends Zend_Acl
  */
 class App_Acl extends Zend_Acl {
     /**
-     * stores the db model
+     * Db Model to the ACL Table
      *
      * @var App_Model_DbTable_Acl
-     * @access private
      */
     private $aclDbModel;
     /**
-     * stores the loaded roles
+     * array for loaded roles
      * 
      * @var array
-     * @access private
      */
     private $roles = array();
     /**
-     * stores the loaded resources
+     * array the loaded resources
      * 
      * @var array
-     * @access private
      */
     private $resources = array();
 
     /**
+     * Build the ressource Rules for  module/controller/action combination
      *
-     * @return
-     * @access public
+     * Function load all needed informations and build the ACL (Zend_Acl))
+     * for a validation. the generation is for a module/controller/action/user
+     * combination, so not all rules for a controller or all users are loaded.
+     *
+     * This means, that the acl will get bigger for each user that is using the system,
+     * but the ACL cache is a file-per-user system, so it should be fast if event
+     * hundreds of rules for a user are available
+     *
+     * @param string $module
+     * @param string $controller
+     * @param string $action
+     * @param App_User $user
+     * @param bool $loadVirtual
      */
     public function buildResourceRules($module, $controller, $action, App_User $user, $loadVirtual = NULL)
     {
         IF($this->aclDbModel === NULL) {
             $this->aclDbModel = new App_Model_DbTable_Acl;
         }
-        $resourceName = $module . '/' . $controller;
+        $rName = $module . '/' . $controller;
         $roles = $this->loadRoles($user->getRoles());
-        $rid = $this->loadResource($module, $controller, $resourceName, $loadVirtual);
+        $rid = $this->loadResource($module, $controller, $rName, $loadVirtual);
         $rules = $this->aclDbModel->getRules($rid, $roles);
-        #da($rid);
-        #da($roles);
-        #da($rules);
-        #exit;
         FOREACH($rules AS $rule) {
-            #da("\$this->{$rule['uaru_rule']}({$rule['uaru_uar_id']}, {$resourceName}, {$rule['uaa_action']})");
-            $this->{$rule['uaru_rule']}($rule['uaru_uar_id'], $resourceName, $rule['uaa_action']);
+            $this->{$rule['uaru_rule']}($rule['uaru_uar_id'], $rName, $rule['uaa_action']);
         }
-        #exit;
     }
 
     /**
@@ -59,19 +72,16 @@ class App_Acl extends Zend_Acl {
      * and retrieve the Id of this resource from the database.
      *
      * @return null|int
-     * @access private
      * @todo: what if resource does not exists? break here?
      */
     private function loadResource($module, $controller, $resourceName, $loadVirtual = NULL)
     {
         $resourceId   = $this->aclDbModel->getResourceId($module, $controller, $loadVirtual);
         
-        IF($this->has($resourceName)) {
-            RETURN $resourceId;
+        IF($this->has($resourceName) === FALSE) {
+            $resource = new App_Acl_Resource($resourceId, $resourceName);
+            $this->add($resource);
         }
-        
-        $resource = new App_Acl_Resource($resourceId, $resourceName);
-        $this->add($resource);
         RETURN $resourceId;
     }
 
@@ -80,7 +90,6 @@ class App_Acl extends Zend_Acl {
      *
      * @param array $roles
      * @return array with loaded App_Acl_Role
-     * @access private
      * @todo check if storing the Zend_Acl_Roles in an extra class array is needed
      */
     private function loadRoles($roles)
@@ -112,8 +121,10 @@ class App_Acl extends Zend_Acl {
     }
 
     /**
+     * Get roles bound to a role
      *
-     * @return
+     * @param App_User $user
+     * @return array
      * @access public
      */
     public function getUserBoundRoles(App_User $user)
@@ -136,9 +147,10 @@ class App_Acl extends Zend_Acl {
     }
 
     /**
+     * Find a role by name
      *
-     * @return
-     * @access public
+     * @return ??
+     * @todo check if used and does this really makes sense?
      */
     public function findRoleByName($name)
     {

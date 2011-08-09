@@ -1,15 +1,26 @@
 <?php
 /**
- * Simple Request(Get/Post) Class to validate them against the
- * Zend Default Validators
+ * Simpel validation class to validate requests (GET/POST) against a
+ * validator map. The validators are all Zend default validators.
  *
- * @todo: extend Class like Zend_Form_Element for own Validators
- * @author Andreas Mairhofer
+ * @author Andreas Mairhofer <andreas@classphp.de>
+ * @verion 0.1
+ * @package App
+ * @subpackage App_Plugin
+ * @namespace App_Plugin
+ * @see Zend Framework <http://framework.zend.com>
+ * @license     http://framework.zend.com/license New BSD License
+ */
+
+/**
+ * @class App_Validate_Ajax
+ * @todo rewrite: it should be possible to setup the validator map through constructor
+ *       This means that all current usages needs to be rewritten
  */
 class App_Validate_Ajax {
 
     /**
-     * Store all needed Zend_Validator_* instances here
+     * array of all Zend_Validator_* instances
      *
      * @var array of Zend_Validator_* Instances
      */
@@ -21,17 +32,14 @@ class App_Validate_Ajax {
      */
     private $pluginLoader;
     /**
-     * Array with the error messages of failed checks
+     * Array with the error messages of failed validations
      *
      * @var array
      */
     private $messages;
 
     /**
-     * Constructor
-     *
-     * Initiate the pluginLoader
-     *
+     * Constructor to init the pluginLoader
      */
     public function __construct()
     {
@@ -76,6 +84,7 @@ class App_Validate_Ajax {
     {
         $this->messages = array();
 
+        // read the validator map and load the validators
         FOREACH($vmap AS $pKey => $map) {
 
             IF($defaultNotEmpty === TRUE) {
@@ -85,6 +94,7 @@ class App_Validate_Ajax {
             $this->getValidators($map['validators']);
         }
 
+        // validate
         FOREACH($vmap AS $pKey => $map) {
             $value = isset($params[$pKey]) ? $params[$pKey] : NULL;
             
@@ -95,7 +105,7 @@ class App_Validate_Ajax {
 
                 IF($this->validators[$v]->isValid($value) === FALSE) {
                     $this->messages[] = $map['message'];
-                    continue;
+                    continue; // ?? why?
                 }
             }
         }
@@ -119,7 +129,7 @@ class App_Validate_Ajax {
      * Retrieve all validators
      *
      * @return array
-     * @see Zend_Form_Element (thats where its from borrowed and modified)
+     * @see Zend_Form_Element::getValidators() (function from Zend_Form_Element borrowed and modified)
      */
     protected function getValidators($array)
     {
@@ -149,7 +159,7 @@ class App_Validate_Ajax {
      *
      * @param  array $validator Validator definition
      * @return Zend_Validate_Interface
-     * @see Zend_Form_Element (thats where its from borrowed and modified)
+     * @see Zend_Form_Element::loadValidator() (function from Zend_Form_Element borrowed and modified)
      */
     protected function loadValidator(array $validator)
     {
