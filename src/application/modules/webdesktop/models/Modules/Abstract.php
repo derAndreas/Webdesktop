@@ -105,58 +105,10 @@ abstract class Webdesktop_Model_Modules_Abstract {
      */
     protected $userPriviliges = array();
     /**
-     * files which belong diretly to the module (no libs)
-     *
-     * the array is parted in 2 items, css and js
-     *
-     *   array(
-     *      'css' => array(
-     *          'style.css'
-     *      ),
-     *      'js' => array(
-     *          'module.js',
-     *          'subfolder/module.ext.js'
-     *      )
-     *   )
-     *
-     * @var array
-     * @todo need to check functionality
-     */
-    protected $files = array();
-    /**
-     * name the libraries are needed for this module
-     *
-     * there are two ways to include a lib.
-     *  - all files of a lib
-     *  - specific file from a lib
-     *
-     * to include all files from a lib just name the library name (eg: foldername)
-     * to include some files use array with foldername as index
-     *
-     *   array(
-     *      'a-complete-lib', // inlucde all js and css files from this lib
-     *      'some-files-from-lib' => array(
-     *          'css' => array(
-     *              'lib-style.css',
-     *              'more-style.css
-     *          ),
-     *          'js' => array(
-     *              'lib-name.js',
-     *              'subfolder/sub-file.js'
-     *          )
-     *      )
-     *   )
-     *
-     * @var array
-     */
-    protected $libraries = array();
-    /**
-     * Startmenu Path in the app
-     * A submenu is (QWIKI Style) seperated with a slash
-     * must fitt with all other modules to generate a nice startmenu
+     * Startmenu Path in the app, default to programs
      * @var string
      */
-    protected $startmenupath = 'StartMenu';
+    protected $startmenupath = self::MENUPATH_PROGRAMS;
     /**
      * the css icon class for this modules
      * @var string
@@ -194,7 +146,6 @@ abstract class Webdesktop_Model_Modules_Abstract {
     {
 
     }
-
     /**
      * Get the name of the module
      *
@@ -270,24 +221,6 @@ abstract class Webdesktop_Model_Modules_Abstract {
         );
     }
 
-
-    /**
-     * Get the information for the API Model to pre Load the module
-     * Defined in Interface
-     *
-     * @todo mode to an abstraction
-     * @return array
-     */
-    public function preLoad()
-    {
-        RETURN array(
-            'moduleId'   => $this->id,
-            'moduleName' => $this->name,
-            'actions'    => $this->actions,
-            'className'  => $this->className
-        );
-    }
-
     /**
      * Get all Actions that this module has
      *
@@ -307,65 +240,6 @@ abstract class Webdesktop_Model_Modules_Abstract {
     public function getModuleId()
     {
         RETURN (string) $this->id;
-    }
-
-    /**
-     * Get all CSS Files that this Module needs to run (execpt from libs)
-     *
-     * @return array
-     */
-    public function getFilesModuleCss()
-    {
-        RETURN (array) $this->files['css'];
-    }
-
-    /**
-     * Get the js files for the module and all dependent libs
-     *
-     * Need to load all Js Files on loading a module
-     *
-     * @param string $pathModules
-     * @param string $pathLibraries
-     * @return array
-     */
-    public function getFilesScripts($pathModules, $pathLibraries)
-    {
-        RETURN array_merge($this->getFilesModuleJs($pathModules), $this->getFilesLibsJs($pathLibraries));
-    }
-
-    /**
-     * Load the content of the JS Files for this modules
-     *
-     * @param string $path
-     * @return array
-     */
-    public function getFilesModuleJs($path)
-    {
-        $return = array();
-        FOREACH($this->files['js'] AS $file) {
-            $return[] = file_get_contents($path . $this->id . '/' . $file, FILE_TEXT);
-        }
-        RETURN $return;
-    }
-
-    /**
-     * Get all Js files for all needed libs (needed libs defined in self::$files)
-     *
-     * @param string $path
-     * @return array
-     */
-    public function getFilesLibsJs($path) {
-        RETURN $this->getFilesLibs($path, 'js');
-    }
-
-    /**
-     * Get all CSS files for all needed libs (needed libs defined in self::$files)
-     *
-     * @param string $path
-     * @return array
-     */
-    public function getFilesLibsCss($path) {
-        RETURN $this->getFilesLibs($path, 'css');
     }
 
     /**
@@ -418,53 +292,6 @@ abstract class Webdesktop_Model_Modules_Abstract {
     public function setResponse(Zend_Controller_Response_Abstract $response)
     {
         $this->response = $response;
-    }
-
-    /**
-     * Get files for libs, to load them on call.
-     *
-     * Method can load a complete library at once or just some files of it-
-     * Of the definition in self::$libraries is just a string, then it means, that
-     * this method should load the complete lib.
-     * If it is an array, then it is a selected definition of lib files, and
-     * just those are loaded. see DocComment for self::$libraries for more info.
-     *
-     * @param string $path
-     * @param string $type (css|js)
-     * @return array
-     */
-    private function getFilesLibs($path, $type)
-    {
-        $ctype = '.' . $type;
-        $ctypeLength = (int) strlen($ctype);
-        $return = array();
-
-        FOREACH($this->libraries AS $key => $el) {
-            IF(is_string($el)) {
-                /**
-                 * if it is a string, then load every .$type (extenstion) in this folder,
-                 * except subfolders (could be image folder)
-                 */
-                $folder = new DirectoryIterator($path . $el);
-                FOREACH($folder AS $file) {
-                    IF($file->isFile() && $file->isReadable() && strtolower(substr($file->getFilename(), $ctypeLength * -1)) === $ctype) {
-                        $return[] = file_get_contents($path . $el . '/' . $file->getFileName(), FILE_TEXT) . PHP_EOL;
-                    }
-                }
-            } ELSEIF(is_array($el)) {
-                /**
-                 * if it is an array, then we just select the given files
-                 * in this lib folder
-                 */
-                FOREACH($el[$type] AS $file) {
-                    IF(is_readable($path . $key . '/' . $file) && strtolower(substr($file, (0 - strlen($ctype)))) === $ctype) {
-                        $return[] = file_get_contents($path . $key . '/' . $file, FILE_TEXT) . PHP_EOL;
-                    }
-                }
-            }
-        }
-
-        RETURN $return;
     }
 
     /**

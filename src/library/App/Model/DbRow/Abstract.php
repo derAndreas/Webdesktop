@@ -114,6 +114,7 @@ class App_Model_DbRow_Abstract {
         IF($data instanceof Zend_Db_Table_Row) {
             $data = $data->toArray();
         }
+
         IF(is_array($data)) {
             FOREACH($data AS $key => $value) {
                 $this->set($key, $value);

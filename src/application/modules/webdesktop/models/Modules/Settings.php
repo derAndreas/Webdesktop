@@ -43,16 +43,6 @@ class Webdesktop_Model_Modules_Settings extends Webdesktop_Model_Modules_Abstrac
         'changeAutorun',
         'changeQuickstart'
     );
-
-    protected $files = array(
-        'css' => array(
-            'style.css'
-        ),
-        'js' => array(
-            'settings.js'
-        )
-    );
-
     /**
      * @todo Dummy index action, can be removed (from ACL too)
      */
@@ -83,10 +73,12 @@ class Webdesktop_Model_Modules_Settings extends Webdesktop_Model_Modules_Abstrac
      * Change the User selected Wallpapaer
      *
      * @return array
+     * @todo check that wallpaper id is a valid one
+     * @todo refresh ACL User, because if user hits Reload the cached ACL User is used
      */
     public function changeWallpaperAction()
     {
-        $usModel = new Webdesktop_Model_DbTable_Userstyle;
+        $usModel = new App_Model_DbTable_User;
         $auth    = Zend_Auth::getInstance();
         $user    = $auth->getIdentity();
         $wId     = $this->request->getParam('id', null);
@@ -121,10 +113,11 @@ class Webdesktop_Model_Modules_Settings extends Webdesktop_Model_Modules_Abstrac
      * Change the user selected theme
      *
      * @return array
+     * @todo refresh ACL User, because if user hits Reload the cached ACL User is used
      */
     public function changeThemeAction()
     {
-        $usModel = new Webdesktop_Model_DbTable_Userstyle;
+        $usModel = new App_Model_DbTable_User;
         $auth    = Zend_Auth::getInstance();
         $user    = $auth->getIdentity();
         $tId     = $this->request->getParam('id', null);

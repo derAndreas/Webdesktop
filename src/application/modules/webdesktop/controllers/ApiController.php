@@ -152,52 +152,6 @@ class Webdesktop_ApiController extends Zend_Controller_Action
     }
 
     /**
-     * Load a webmodule with JS and CSS Code
-     *
-     * This is legacy code of the old design and will be removed in the next releases.
-     * With ExtJs3 there was no Loader for modules. With the new Class System,
-     * the Ext.Loader and several other updates that came with ExtJs4 this is not
-     * needed any more
-     *
-     * The method is not updated for ExtJs4 and will fail in any case!
-     *
-     * @access public
-     * @deprecated
-     * @todo remove
-     */
-    public function loadAction()
-    {
-        $modelDbModules = new Webdesktop_Model_DbTable_Modules;
-        $module = $modelDbModules->findModuleById($this->module);
-        
-        IF($module->count() === 1) {
-            $class = $module->current()->m_classname ;
-            $obj = new $class;
-            $load = $obj->preLoad();
-            
-            $privileges = array();
-            FOREACH($load['actions'] AS $action) {
-                $privileges[$action] = (bool) $this->acl->isAllowed($load['moduleId'], $action);
-            }
-
-            $load['actions'] = $privileges;
-
-            $load['scripts'] = $obj->getFilesModuleJs($this->config->path->modules);
-
-            $load['libs']['css'] = $obj->getFilesLibsCss($this->config->path->libraries);
-            $load['libs']['js']  = $obj->getFilesLibsJs($this->config->path->libraries);
-            
-
-            $load['success'] = TRUE;
-
-            $this->_helper->json->sendJson($load);
-
-        } ELSE {
-            RETURN $this->defaultResponses('Cannot load Module, module not found', self::REQUEST_ERROR_PRECONDITION);
-        }
-    }
-
-    /**
      * Main request method
      *
      * Every call to a module/action should be routed through  this method, as

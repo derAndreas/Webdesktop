@@ -466,20 +466,26 @@ INSERT INTO `user_styles` (`us_id`, `us_uu_id`, `us_sth_id`, `us_swp_id`, `us_ba
 CREATE TABLE IF NOT EXISTS `user_users` (
   `uu_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uu_ug_id` smallint(5) unsigned NOT NULL,
+  `uu_sth_id` tinyint(3) NOT NULL,
+  `uu_swp_id` tinyint(3) NOT NULL,
   `uu_username` varchar(128) NOT NULL,
   `uu_passwort` varchar(32) NOT NULL,
   `uu_name` varchar(255) NOT NULL,
   `uu_email` varchar(255) NOT NULL,
   `uu_active` tinyint(4) NOT NULL DEFAULT '1',
   `uu_deleted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `uu_bgcolor` varchar(6) NOT NULL DEFAULT '3D71B8',
+  `uu_fgcolor` varchar(6) NOT NULL DEFAULT 'FFFFFF',
+  `uu_transparency` int(100) NOT NULL DEFAULT '100',
+  `uu_wpos` tinyint(2) NOT NULL DEFAULT '1',
   PRIMARY KEY (`uu_id`),
   KEY `uu_ug_id` (`uu_ug_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Daten für Tabelle `user_users`
 --
 
-INSERT INTO `user_users` (`uu_id`, `uu_ug_id`, `uu_username`, `uu_passwort`, `uu_name`, `uu_email`, `uu_active`, `uu_deleted`) VALUES
-(1, 1, 'guest', 'no valid password', 'Default Guest User', 'guest@example.com', 1, '0000-00-00 00:00:00'),
-(2, 2, 'admin', '', 'Admin User', 'admin@example.com', 1, '0000-00-00 00:00:00');
+INSERT INTO `user_users` (`uu_id`, `uu_ug_id`, `uu_sth_id`, `uu_swp_id`, `uu_username`, `uu_passwort`, `uu_name`, `uu_email`, `uu_active`, `uu_deleted`, `uu_bgcolor`, `uu_fgcolor`, `uu_transparency`, `uu_wpos`) VALUES
+(1, 2, 1, 1, 'guest', '-', 'Default Guest User', 'guest@example.com', 1, '0000-00-00 00:00:00', '3D71B8', 'FFFFFF', 100, 0),
+(2, 2, 1, 3, 'admin', '', 'The Administration', 'admin@example.com', 1, '0000-00-00 00:00:00', '3D71B8', 'FFFFFF', 100, 0);

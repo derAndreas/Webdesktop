@@ -53,8 +53,7 @@ class App_Auth_Strategy_Db {
                         ->authenticate();
         
         IF($result->isValid()) {
-            $data = (array) $internalAdapter->getResultRowObject();
-            $this->adapter->getUser()->update($data['uu_id']);
+            $this->adapter->getUser()->update((array) $internalAdapter->getResultRowObject());
         }
         
         RETURN new Zend_Auth_Result(

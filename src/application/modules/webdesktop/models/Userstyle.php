@@ -118,24 +118,13 @@ class Webdesktop_Model_Userstyle
         }
 
         IF($this->user->getId() === $userId) {
-                $this->userTheme = $return;
-            }
+            $this->userTheme = $return;
+        }
 
         RETURN $return;
 
     }
 
-    /**
-     *
-     * @return
-     * @access public
-     */
-    public function getUserThemeCssFile($userId = NULL)
-    {
-        $userId = !is_null($userId) ? $userId : $this->user->getId();
-        $data = isset($this->userTheme) ? $this->userTheme : $this->getUserTheme($userId);
-        RETURN $data['src'];
-    }
 
     /**
      *

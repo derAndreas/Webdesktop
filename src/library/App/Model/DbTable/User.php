@@ -110,5 +110,76 @@ class App_Model_DbTable_User extends Zend_Db_Table_Abstract
         RETURN $this->getAdapter()->fetchAll($select);
     }
 
+
+    /**
+     * Get the user wallpaper settings
+     *
+     * @param int $userId
+     * @return Zend_Db_Table_Rowset_Abstract
+     * @access public
+     */
+    public function getUserWallpaper($userId)
+    {
+        $select = $this->getAdapter()->select()
+                  ->from($this->_name)
+                  ->joinLeft('style_wallpapers', 'swp_id = us_swp_id', array('swp_id', 'swp_name', 'swp_file_thumb', 'swp_file'))
+                  ->where('uu_id = ?', $userId);
+
+        RETURN $this->getAdapter()->fetchRow($select);
+    }
+
+    /**
+     * Set (update) a wallpaper for a user
+     *
+     * @param int $wpId
+     * @param string $stretch
+     * @param int $userId
+     * @return int number of affected rows
+     */
+    public function setWallpaper($wpId, $stretch, $userId)
+    {
+        RETURN parent::update(
+            array(
+                'uu_swp_id' => $wpId,
+                'uu_wpos'   => $stretch
+            ),
+            $this->getAdapter()->quoteInto('uu_id = ?', $userId, Zend_Db::INT_TYPE)
+        );
+    }
+
+    /**
+     * get the user theme settings
+     *
+     * @param int $userId
+     * @return Zend_Db_Table_Rowset_Abstract
+     * @access public
+     */
+    public function getUserTheme($userId)
+    {
+        $select = $this->getAdapter()->select()
+                  ->from($this->_name)
+                  ->joinLeft('style_themes', 'sth_id = uu_sth_id', array('sth_id', 'sth_name', 'sth_preview', 'sth_file'))
+                  ->where('uu_id = ?', $userId);
+
+        RETURN $this->getAdapter()->fetchRow($select);
+    }
+
+    /**
+     * Set (update) a theme for a user
+     *
+     * @param int $themeId
+     * @param int $userId
+     * @return int number of affected rows
+     */
+    public function setTheme($themeId, $userId)
+    {
+        RETURN parent::update(
+            array(
+                'uu_sth_id' => $themeId
+            ),
+            $this->getAdapter()->quoteInto('uu_id = ?', $userId, Zend_Db::INT_TYPE)
+        );
+    }
+
 }
 ?>

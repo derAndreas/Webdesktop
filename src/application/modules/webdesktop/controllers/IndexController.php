@@ -42,8 +42,6 @@ class Webdesktop_IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $this->_helper->layout()->themeCss   = $this->model->getUserStyleModel()->getUserThemeCssFile();
-        $this->_helper->layout()->modulesCss = $this->model->getInitCssFiles();
         $this->view->userConfig = $this->model->getInitConfig();
     }
 

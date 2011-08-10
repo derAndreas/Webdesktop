@@ -37,8 +37,9 @@ class Webdesktop_Model_Acl
      *
      * @constructor
      */
-    public function __construct()
+    public function __construct(App_User $user)
     {
+        $this->user = $user;
         $cache = Zend_Registry::get('Cache_Acl');
         $this->acl = $cache->load('acl_object');
         IF(!$this->acl) {

@@ -14,15 +14,39 @@
 
 /**
  * @class App_User
- * @todo I think the system changed so much, that this needs to be refactored.
- *       especially the update method seems odd
+ * @todo refactored a lot, but needs some polish
  */
-class App_User {
+class App_User extends App_Model_DbRow_Abstract {
     /**
      * id of the user
      * @var integer
      */
     protected $id;
+    /**
+     * the group integer value for this user
+     * @var integer
+     */
+    protected $groupid;
+    /**
+     * the theme id (used for webdesktop)
+     * @var integer
+     */
+    protected $themeid;
+    /**
+     * the wallpaper id (used for webdesktop)
+     * @var integer
+     */
+    protected $wpid;
+    /**
+     * users username
+     * @var string
+     */
+    protected $username;
+    /**
+     * users passwort hash
+     * @var string
+     */
+    protected $password;
     /**
      * users name
      * @var string
@@ -34,10 +58,35 @@ class App_User {
      */
     protected $email;
     /**
-     * the group integer value for this user
-     * @var integer
+     * users enabled status
+     * @var string
      */
-    protected $group;
+    protected $enabled;
+    /**
+     * users deleted time
+     * @var string
+     */
+    protected $deleted;
+    /**
+     * users bgcolor (used for webdesktop)
+     * @var string
+     */
+    protected $bgcolor;
+    /**
+     * users fgcolor (used for webdesktop)
+     * @var string
+     */
+    protected $fgcolor;
+    /**
+     * users transparency (used for webdesktop)
+     * @var string
+     */
+    protected $transparency;
+    /**
+     * users WP position (used for webdesktop)
+     * @var string
+     */
+    protected $wppos;
     /**
      * the group name
      * @var string
@@ -48,6 +97,34 @@ class App_User {
      * @var array
      */
     protected $roles = array();
+
+
+    /**
+     * Maps the User Table to own defined keys
+     * to abstract more from db schema
+     *
+     * @var array
+     */
+    protected $_transformColumnMap = array(
+        'id'       => 'uu_id',
+        'groupid'  => 'uu_ug_id',
+        'themeid'  => 'uu_sth_id',
+        'wpid'     => 'uu_swp_id',
+        'username' => 'uu_username',
+        'password' => 'uu_passwort',
+        'name'     => 'uu_name',
+        'email'    => 'uu_email',
+        'enabled'  => 'uu_active',
+        'deleted'  => 'uu_deleted',
+        'bgcolor'  => 'uu_bgcolor',
+        'fgcolor'  => 'uu_fgcolor',
+        'transparency'  => 'uu_transparency',
+        'wppos'    => 'uu_wpos',
+        'groupname'=> '_dummy_',
+        'roles'    => '_dummy_'
+    );
+    protected $defaultDbColumns   = array();
+    protected $defaultJsonColumns = array();
 
     /**
      * get the user id
@@ -156,30 +233,30 @@ class App_User {
     }
 
     /**
-     * update the whole dataset of the user by its id
+     * update the whole dataset of the user by id
      *
-     * @param integer $id database user id
+     * @param array $data The userrow as an array from the DB
      * @return App_User $this
      */
-    public function update($id)
+    public function update($data)
     {
-        $id = (int) $id;
-        $userTable = new App_Model_DbTable_User;
-        $userSet = $userTable->find($id)->current();
-        $groupSet = $userSet->findDependentRowset('App_Model_DbTable_Group')->current();
-        $roleArray = $userTable->getRoleBinding($id, (int) $groupSet->ug_id);
+        IF(count($data) === 0) {
+            throw new Exception('Could not update App_User, invalid user');
+        }
+        $dbUser  = new App_Model_DbTable_User;
+        $dbGroup = new App_Model_DbTable_Group;
+        $this->fromArray($data); // sets the whole userdata
 
+        $groupRow = $dbGroup->find($this->get('groupid'));
+        $this->set('groupname', $groupRow->current()->ug_name);
 
-        FOREACH($roleArray AS $role) {
-            $roles[$role['uar_id']] = $role['uar_name'];
+        $roles = array();
+        FOREACH($dbUser->getRoleBinding($this->get('id'), $this->get('groupid')) AS $role) {
+            $key         = $role['uar_id'];
+            $roles[$key] = $role['uar_name'];
         }
 
-        $this->setId($id)
-             ->setName($userSet->uu_name)
-             ->setGroupId($userSet->uu_ug_id)
-             ->setGroupName($groupSet->ug_name)
-             ->setEmail($userSet->uu_email)
-             ->setRole($roles);
+        $this->setRole($roles);
 
         RETURN $this;
     }

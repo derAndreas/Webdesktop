@@ -12,7 +12,7 @@
  */
 
 /**
- * @class Webdesktop_Model_ModuleSet
+ * @class Webdesktop_Model_Modules
  * @deprecated
  * @todo old legacy code, dont know why this was implemented
  *       this can directly be handled in the Webdesktop Model (Webdesktop_Model_Webdesktop)
@@ -138,41 +138,6 @@ class Webdesktop_Model_Modules
                     $return['shortcut'][]    = $row['m_moduleId'];
                 BREAK;
             }
-        }
-
-        RETURN $return;
-    }
-
-    /**
-     * prepare the module data for JSON output
-     *
-     * @return array
-     * @access public
-     * @deprecated
-     * @todo removed, unused
-     */
-    public function prepareJson($what = FALSE)
-    {
-        SWITCH($what) {
-            CASE 'initUserModules':
-                RETURN $this->prepareJsonInitConfig($this->getAllUserModules());
-            BREAK;
-        }
-    }
-
-    /**
-     * ???
-     *
-     * @param <type> $modules
-     * @return string
-     * @deprecated
-     * @todo removed, unused
-     */
-    private function prepareJsonInitConfig($modules)
-    {
-        $return = array();
-        FOREACH($modules AS $module) {
-            $return[] = 'new WebDesk.' . $module->getId() . '()';
         }
 
         RETURN $return;

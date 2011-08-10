@@ -72,15 +72,6 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
         'saveActionPermissions'         # used
     );
 
-    protected $files = array(
-        'css' => array(
-            'style.css'
-        ),
-        'js' => array(
-            'administration.js'
-        )
-    );
-
     /**
      * Load the Groups in the UserManagement Context
      *
