@@ -1,7 +1,7 @@
 Ext.Loader.setConfig({
     enabled: true,
     paths: {
-        'Ext.ux': 'lib/Ext.ux',
+        'Ext.ux': 'lib/Ext.ux'
     }
 });
 

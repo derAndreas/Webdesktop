@@ -210,11 +210,11 @@ Ext.define('Webdesktop.controller.administration.Administration', {
                 click: me.onSaveUserDelete
             },
 
-            /** USER: GRID INFO **/
+            /** USER: GRID INFO 
             '.administration_userinfo': {
                 // todo
             },
-
+            **/
             // END USER
 
             /** GROUP: GRID LIST **/
@@ -371,7 +371,7 @@ Ext.define('Webdesktop.controller.administration.Administration', {
             /** Action: Save Edit Permissions */
             '.administration_actionpermission toolbar[dock=top] button[iconCls=ux-icon-accept]': {
                 click: me.onSaveActionPermission
-            },
+            }
         });
         win.show();
     },
@@ -446,9 +446,11 @@ Ext.define('Webdesktop.controller.administration.Administration', {
             g.getSelectionModel().deselectAll();
             g.getStore().load();
             // buttons in toolbar need to be hidden, because row focus is gone after relaod
+            /*
             Ext.each(['addController', 'editController', 'deleteController', 'statusController', 'permissionsController', 'listActions'], function(el) {
                 //g.down('toolbar button[actionType='+el+']').setVisible(false);
             }, me);
+            */
         }
     },
     /**
@@ -851,7 +853,7 @@ Ext.define('Webdesktop.controller.administration.Administration', {
             alias  = sf('administration_controller{0}', type);
             title  = sf('{0}/{1}', record.get('moduleName'), record.get('controllerName'));
             rId    = record.get('id') ? record.get('id') : title;
-            itemId = sf('{0}-{1}', alias, rId),
+            itemId = sf('{0}-{1}', alias, rId);
             query  = sf('.{0}[itemId={1}]', alias, itemId);
             if(type !== 'permission') {
                 // every view, except permission, is a form
@@ -977,7 +979,7 @@ Ext.define('Webdesktop.controller.administration.Administration', {
             alias  = sf('administration_action{0}', type);
             rId    = record.get('id') ? record.get('id') : record.get('actionName');
             title  = sf('{0} {1}', Ext.String.capitalize(type), record.get('actionName'));
-            itemId = sf('{0}-{1}', alias, rId),
+            itemId = sf('{0}-{1}', alias, rId);
             query  = sf('.{0}[itemId={1}]', alias, itemId);
             if(type !== 'permission') {
                 form = me.loadAndInitTabWidget(alias, {
@@ -1149,7 +1151,8 @@ Ext.define('Webdesktop.controller.administration.Administration', {
                 me.getTabPanel().setActiveTab(me.getTabPanel().down('.administration_userlist'));
             }));
         } else {
-
+            // FIXME: error handling
+            return false;
         }
     },
 

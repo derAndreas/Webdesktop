@@ -42,7 +42,7 @@ Ext.define('Webdesktop.view.administration.MainPanel', {
             height      : 560,
             layout      : 'fit',
             defaults    : {
-                border : false, //FIXME: see class comment, bug
+                border : false //FIXME: see class comment, bug
             },
             dockedItems : [{
                 dock   : 'left',
@@ -57,7 +57,7 @@ Ext.define('Webdesktop.view.administration.MainPanel', {
                 border     : false, //FIXME: see class comment, bug
                 defaults   : {
                     closable : true, //FIXME: see class comment, bug
-                    border   : false, //FIXME: see class comment, bug
+                    border   : false //FIXME: see class comment, bug
                 },
                 items : [{
                     title       : 'Home',

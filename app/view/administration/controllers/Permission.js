@@ -58,7 +58,6 @@ Ext.define('Webdesktop.view.administration.controllers.Permission', {
                 dataIndex : 'roleName',
                 width     : 180
             },{
-                
                 text      : me.record.get('moduleName') + '/' + me.record.get('controllerName'),
                 dataIndex : 'rule',
                 renderer  : me.ruleRenderer,

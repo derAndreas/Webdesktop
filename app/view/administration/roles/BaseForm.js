@@ -165,7 +165,7 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
                     iconCls : 'ux-icon-accept'
                 },{
                     text    : 'Cancel',
-                    iconCls : 'ux-icon-cancel',
+                    iconCls : 'ux-icon-cancel'
                 }]
             }]
         });
@@ -256,7 +256,6 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
 
         setVal = function (fieldId, val) {
             var field = me.findField(fieldId);
-            console.log('setval', fieldId, val, field);
             if (field) {
                 field.setValue(val);
                 if (me.trackResetOnLoad) {
@@ -284,20 +283,20 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
         me._record.users().each(function(record) {
             refPanel.assignedUsersStore.add(record);
             //refPanel.existingUsersStore.remove(record); //FIXME:  just using the record does not work
-            refPanel.existingUsersStore.remove(refPanel.existingUsersStore.getById(record.get('id')))
+            refPanel.existingUsersStore.remove(refPanel.existingUsersStore.getById(record.get('id')));
         }, me);
         me._record.groups().each(function(record) {
             refPanel.assignedGroupsStore.add(record);
             //refPanel.existingUsersStore.remove(record); //FIXME:  just using the record does not work
-            refPanel.existingGroupsStore.remove(refPanel.existingGroupsStore.getById(record.get('id')))
+            refPanel.existingGroupsStore.remove(refPanel.existingGroupsStore.getById(record.get('id')));
         }, me);
         me._record.inherits().each(function(record) {
             refPanel.assignedRolesStore.add(record);
             //refPanel.existingUsersStore.remove(record); //FIXME:  just using the record does not work
-            refPanel.existingRolesStore.remove(refPanel.existingRolesStore.getById(record.get('id')))
+            refPanel.existingRolesStore.remove(refPanel.existingRolesStore.getById(record.get('id')));
         }, me);
         // do not show self role as inheritable role
-        refPanel.existingRolesStore.remove(refPanel.existingRolesStore.getById(me._record.get('id')))
+        refPanel.existingRolesStore.remove(refPanel.existingRolesStore.getById(me._record.get('id')));
 
         return this;
     },
@@ -324,7 +323,7 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
             },
             defaults      : {
                 flex       : 1,
-                stripeRows : true,
+                stripeRows : true
             },
             items: [{
                 xtype      : 'gridpanel',
@@ -404,7 +403,7 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
             },
             defaults      : {
                 flex       : 1,
-                stripeRows : true,
+                stripeRows : true
             },
             items         : [{
                 xtype      : 'gridpanel',
@@ -415,7 +414,7 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
                         ptype     : 'gridviewdragdrop',
                         dragGroup : 'firstGridDDGroup',
                         dropGroup : 'secondGridDDGroup'
-                    },
+                    }
                 },
                 columns    : [{
                     text      : 'Name',
@@ -471,7 +470,7 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
             },
             defaults      : {
                 flex       : 1,
-                stripeRows : true,
+                stripeRows : true
             },
             items         : [{
                 xtype      : 'gridpanel',
@@ -482,7 +481,7 @@ Ext.define('Webdesktop.view.administration.roles.BaseForm', {
                         ptype     : 'gridviewdragdrop',
                         dragGroup : 'firstGridDDGroup',
                         dropGroup : 'secondGridDDGroup'
-                    },
+                    }
                 },
                 columns    : [{
                     text      : 'Name',

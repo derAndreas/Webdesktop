@@ -91,7 +91,7 @@ Ext.define('Webdesktop.view.administration.users.BaseForm', {
                     iconCls : 'ux-icon-accept'
                 },{
                     text    : 'Cancel',
-                    iconCls : 'ux-icon-cancel',
+                    iconCls : 'ux-icon-cancel'
                 }]
             }]
         });

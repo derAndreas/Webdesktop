@@ -42,13 +42,13 @@ Ext.define('Webdesktop.view.administration.groups.Delete', {
             },
             defaults : {
                 anchor   : '60%',
-                disabled : true,
+                disabled : true
             },
             items : [{
                 xtype      : 'hiddenfield',
                 name       : 'id',
                 allowBlank : false,
-                disabled   : false,  // or it does not be submitted through form.submit()
+                disabled   : false  // or it does not be submitted through form.submit()
             },{
                 name       : 'name',
                 fieldLabel : 'Name'
@@ -60,7 +60,7 @@ Ext.define('Webdesktop.view.administration.groups.Delete', {
                 fieldLabel  : 'Attention',
                 value       : 'Please check if this group really should be deleted!',
                 formItemCls : 'ux-color-red',
-                disabled    : false,
+                disabled    : false
             }],
             dockedItems: [{
                 xtype : 'toolbar',
@@ -70,7 +70,7 @@ Ext.define('Webdesktop.view.administration.groups.Delete', {
                     iconCls : 'ux-icon-accept'
                 },{
                     text    : 'Cancel',
-                    iconCls : 'ux-icon-cancel',
+                    iconCls : 'ux-icon-cancel'
                 }]
             }]
         });

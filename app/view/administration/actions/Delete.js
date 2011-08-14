@@ -59,7 +59,7 @@ Ext.define('Webdesktop.view.administration.actions.Delete', {
             }, {
                 xtype      : 'textareafield',
                 name       : 'description',
-                fieldLabel : 'Description',
+                fieldLabel : 'Description'
             }],
             dockedItems: [{
                 xtype : 'toolbar',

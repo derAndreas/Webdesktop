@@ -39,7 +39,7 @@ Ext.define('Webdesktop.view.administration.roles.Add', {
                     iconCls : 'ux-icon-add'
                 },{
                     text    : 'Cancel',
-                    iconCls : 'ux-icon-cancel',
+                    iconCls : 'ux-icon-cancel'
                 }]
             }]
         });

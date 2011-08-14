@@ -23,7 +23,7 @@ Ext.define('Webdesktop.view.settings.Window', {
     alias    : 'widget.settings_window',
     requires : [
         'Webdesktop.view.settings.Menu',
-        'Webdesktop.view.settings.Background',
+        'Webdesktop.view.settings.Background'
     ],
     uses     : [
         'Webdesktop.view.settings.Theme',

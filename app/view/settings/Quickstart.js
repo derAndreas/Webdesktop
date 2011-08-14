@@ -32,7 +32,7 @@ Ext.define('Webdesktop.view.settings.Quickstart', {
             frame    : false,
             defaults : {
                 bodyPadding : '20',
-                border      : false, //FIXME: see class comment, bug
+                border      : false //FIXME: see class comment, bug
             },
             buttons  : [{
                 text       : 'Save',

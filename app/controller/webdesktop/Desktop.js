@@ -63,7 +63,7 @@ Ext.define('Webdesktop.controller.webdesktop.Desktop' ,{
         { ref: 'windowBarContextMenu', selector: '#taskbar-contextmenu'},
         { ref: 'viewPort',      selector: 'webdesktop_viewport'},
         { ref: 'wallpaper',     selector: 'webdesktop_wallpaper'},
-        { ref: 'shortcutsView', selector: 'webdesktop_desktop dataview[itemId=ux-shortcut]',}
+        { ref: 'shortcutsView', selector: 'webdesktop_desktop dataview[itemId=ux-shortcut]'}
     ],
 
     config: {
@@ -254,7 +254,7 @@ Ext.define('Webdesktop.controller.webdesktop.Desktop' ,{
          * @scope me
          */
         var fnAddQuick = Ext.bind(function(module) {
-            me.getQuickStart().add(Ext.apply({ // getQuickStart()
+            me.getQuickStart().add(Ext.apply({
                 moduleId: module.moduleId
             }, module.launcher));
         }, me);
@@ -320,7 +320,7 @@ Ext.define('Webdesktop.controller.webdesktop.Desktop' ,{
             Ext.apply(this.getQuickStartButton(), {
                 overflowText: button.text,
                 tooltip     : {
-                    text : button.text,
+                    text : button.text
                 }
             }
         ));

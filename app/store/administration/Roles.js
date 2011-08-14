@@ -24,7 +24,7 @@ Ext.define('Webdesktop.store.administration.Roles', {
         api    : {
             read   : GLOBAL_USER_PROFILE.apiUrl + '_module/administration/_action/loadRoleRoles',
             create : GLOBAL_USER_PROFILE.apiUrl + '_module/administration/_action/saveNewRole',
-            update : GLOBAL_USER_PROFILE.apiUrl + '_module/administration/_action/saveEditRole',
+            update : GLOBAL_USER_PROFILE.apiUrl + '_module/administration/_action/saveEditRole'
         },
         reader : {
             type : 'json',

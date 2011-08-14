@@ -21,7 +21,8 @@ Ext.define('Webdesktop.store.webdesktop.Shortcuts', {
     extend     : 'Ext.data.Store',
     model      : 'Webdesktop.model.webdesktop.Module',
     idProperty : 'moduleId',
-    fields     : [{
+    fields     : [
+        {
             name: 'moduleId'
         }, {
             //FIXME: Don't get mapping to work, used convert as workaround

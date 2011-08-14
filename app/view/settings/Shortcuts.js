@@ -35,7 +35,7 @@ Ext.define('Webdesktop.view.settings.Shortcuts', {
             frame    : false,
             defaults : {
                 bodyPadding : '20',
-                border      : false, //FIXME: see class comment, bug
+                border      : false //FIXME: see class comment, bug
             },
             buttons: [{
                 text        : 'Save',

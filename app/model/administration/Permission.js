@@ -28,7 +28,7 @@ Ext.define('Webdesktop.model.administration.Permission', {
         {type: 'presence', field: 'ident'},
         {type: 'presence', field: 'roleId'},
         //{type: 'presence', field: 'rule'},  //FIXME: bug in 4.0.2a, does not validate (int) 0 to true, should be fixed in 4.1
-        {type: 'format',   field: 'rule', matcher: /^\d+$/},
+        {type: 'format',   field: 'rule', matcher: /^\d+$/}
     ]
 });
 

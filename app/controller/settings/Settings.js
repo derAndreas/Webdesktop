@@ -50,7 +50,7 @@ Ext.define('Webdesktop.controller.settings.Settings', {
         { ref: 'theme',             selector: 'settings_theme'},
         { ref: 'shortcuts',         selector: 'settings_shortcuts'},
         { ref: 'autorun',           selector: 'settings_autorun'},
-        { ref: 'quickstart',        selector: 'settings_quickstart'},
+        { ref: 'quickstart',        selector: 'settings_quickstart'}
     ],
     /**
      * Load the CSS files from the ressources/css folder
@@ -111,7 +111,7 @@ Ext.define('Webdesktop.controller.settings.Settings', {
             },
             'settings_quickstart button[actionType=save]': {
                 click: me.setSaveQuickstart
-            },
+            }
         });
         win.show();
     },
@@ -257,10 +257,10 @@ Ext.define('Webdesktop.controller.settings.Settings', {
             modules = me.getDesktop().getModules(),
             module = modules.get(node.raw.moduleId),
             store = me.getDesktop().shortcuts,
-            record = store.findRecord('moduleId', module.moduleId)
+            record = store.findRecord('moduleId', module.moduleId);
         if(status === true) {
             // add shortcut to desktop
-            store.add(module)
+            store.add(module);
         } else {
             // remove shortcut from desktop
             store.remove(record);

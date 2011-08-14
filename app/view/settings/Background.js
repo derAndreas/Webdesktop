@@ -31,7 +31,7 @@ Ext.define('Webdesktop.view.settings.Background', {
             frame    : false,
             layout   : 'border',
             defaults : {
-                border : false, //FIXME: see class comment, bug
+                border : false //FIXME: see class comment, bug
             },
             buttons  : [{
                  text       : 'Save',
@@ -46,7 +46,7 @@ Ext.define('Webdesktop.view.settings.Background', {
                 width    : 150,
                 minWidth : 100,
                 defaults : {
-                    border : false, //FIXME: see class comment, bug
+                    border : false //FIXME: see class comment, bug
                 },
                 items: [{
                     xtype  : 'panel',
