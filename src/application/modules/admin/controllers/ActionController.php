@@ -279,7 +279,7 @@ class Admin_ActionController extends Zend_Controller_Action {
         }
 
         FOREACH($dbRules->fetchRulesForAction($actionRow->get('id')) AS $row) {
-            $rules[] = new Admin_Model_DbRow_Permission($row);
+            $rules[] = new Admin_Model_DbRow_Rule($row);
         }
 
         FOREACH($rules AS $rule) {

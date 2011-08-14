@@ -1026,7 +1026,7 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
                 $permissions = $ruleModel->findRoleRules($role->get('id'), $actionRow->get('mcId'), $actionRow->get('id'));
                 $aIdent      = join("_", array($role->get('id'), $actionRow->get('mcId'), $actionRow->get('id')));
                 IF($permissions->count() > 0) {
-                    $permissions = new Admin_Model_DbRow_Permission($permissions->current());
+                    $permissions = new Admin_Model_DbRow_Rule($permissions->current());
                     IF($permissions->get('rule') === Admin_Model_DbTable_Acl_Rule::RULE_DB_ALLOW) {
                         $rule = Admin_Model_DbTable_Acl_Rule::RULE_ALLOW;
                     } ELSEIF($permissions->get('rule') === Admin_Model_DbTable_Acl_Rule::RULE_DB_DENY) {
@@ -1036,7 +1036,7 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
                     }
                     $permissions->set('rule', $rule);
                 } ELSE {
-                    $permissions = new Admin_Model_DbRow_Permission(array(
+                    $permissions = new Admin_Model_DbRow_Rule(array(
                         'mcId'     => $actionRow->get('mcId'),
                         'aId'      => $actionRow->get('id'),
                         'roleId'   => $role->get('id'),
@@ -1105,7 +1105,7 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
             $ruleModel->deleteWithActionRole($action->get('id'), $role->get('id'));
 
             IF($rule !== NULL) {
-                $permission = new Admin_Model_DbRow_Permission(array(
+                $permission = new Admin_Model_DbRow_Rule(array(
                     'mcId'   => $action->get('mcId'),
                     'aId'    => $action->get('id'),
                     'roleId' => $role->get('id'),
