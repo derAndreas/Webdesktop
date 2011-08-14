@@ -15,17 +15,41 @@
  */
 
 /**
- * @class Admin_Model_DbRow_Permission
+ * @class Admin_Model_DbRow_Rule
  * @extends App_Model_DbRow_Abstract
- * @todo see App_Model_DbRow_Abstract
- * @todo maybe rename to Admin_Model_DbRow_Rule to fit the Db Layout
  */
-class Admin_Model_DbRow_Permission extends App_Model_DbRow_Abstract {
+class Admin_Model_DbRow_Rule extends App_Model_DbRow_Abstract
+{
+    /**
+     * Id of the rule
+     * @var int
+     */
     protected $id;
+    /**
+     * Module/Controller ID that rule is for
+     * @var int
+     */
     protected $mcId;
+    /**
+     * Action ID that rule is for
+     * @var int
+     */
     protected $aId;
+    /**
+     * Role Id
+     * @var int
+     */
     protected $roleId;
+    /**
+     * Allow/Deny rule
+     * see Admin_Model_DbTable_Acl_Rule constants
+     * @var String
+     */
     protected $rule;
+    /**
+     * Name of the role (dummy)
+     * @var string
+     */
     protected $roleName;
     /**
      * Maps the Controller Table to own defined keys

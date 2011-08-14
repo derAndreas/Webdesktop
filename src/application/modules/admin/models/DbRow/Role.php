@@ -17,19 +17,29 @@
 /**
  * @class Admin_Model_DbRow_Role
  * @extends App_Model_DbRow_Abstract
- * @todo see App_Model_DbRow_Abstract
  */
 class Admin_Model_DbRow_Role extends App_Model_DbRow_Abstract {
-    protected $id;
-    protected $name;
-    protected $enabled;
-    protected $description;
     /**
-     * Maps the User Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
+     * ID of the role
+     * @var int
      */
+    protected $id;
+    /**
+     * Name of the role
+     * @var string
+     */
+    protected $name;
+    /**
+     * Flag if role is en/disabled
+     * @var int
+     */
+    protected $enabled;
+    /**
+     * Description of the role
+     * @var string
+     */
+    protected $description;
+
     protected $_transformColumnMap = array(
         'id'          => 'uar_id',
         'name'        => 'uar_name',

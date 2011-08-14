@@ -19,15 +19,22 @@
  * @extends App_Model_DbRow_Abstract
  */
 class Webdesktop_Model_DbRow_Wallpaper extends App_Model_DbRow_Abstract {
-    protected $id;
-    protected $name;
-    protected $src;
     /**
-     * Maps the Wallpaper Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
+     * ID of the wallpaper
+     * @var int
      */
+    protected $id;
+    /**
+     * Name of the wallpaper
+     * @var string
+     */
+    protected $name
+    /**
+     * Name of the image file
+     * @var string
+     */
+    protected $src;
+
     protected $_transformColumnMap = array(
         'id'       => 'swp_id',
         'name'     => 'swp_name',
@@ -36,5 +43,6 @@ class Webdesktop_Model_DbRow_Wallpaper extends App_Model_DbRow_Abstract {
 
     protected $defaultDbColumns   = array('name', 'src');
     protected $defaultJsonColumns = array('id', 'name', 'src');
+
 }
 ?>

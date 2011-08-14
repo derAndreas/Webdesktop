@@ -20,20 +20,49 @@
  * @todo see App_Model_DbRow_Abstract
  */
 class Admin_Model_DbRow_User extends App_Model_DbRow_Abstract {
-    protected $id;
-    protected $groupid;
-    protected $username;
-    protected $name;
-    protected $email;
-    protected $passwort;
-    protected $enabled;
-    protected $deleted;
     /**
-     * Maps the User Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
+     * ID of the user
+     * @var int
      */
+    protected $id;
+    /**
+     * ID of the group the user is assigned to
+     * @var int
+     */
+    protected $groupid;
+    /**
+     * username
+     * @var string
+     */
+    protected $username;
+    /**
+     * Realname of the user
+     * @var string
+     */
+    protected $name;
+    /**
+     * Mailaddress of the user
+     * @var string
+     */
+    protected $email;
+    /**
+     * salted Password hash
+     * @var string
+     */
+    protected $passwort;
+    /**
+     * flag if user is en/disabled
+     * @var int
+     */
+    protected $enabled;
+    /**
+     * If the user is "deleted" the timestamp in the db will be set
+     * cannot really delete a user, because of reference to the id for
+     * archiving data
+     * @var string
+     */
+    protected $deleted;
+
     protected $_transformColumnMap = array(
         'id'       => 'uu_id',
         'groupid'  => 'uu_ug_id',

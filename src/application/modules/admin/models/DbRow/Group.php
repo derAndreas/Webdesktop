@@ -17,19 +17,30 @@
 /**
  * @class Admin_Model_DbRow_Group
  * @extends App_Model_DbRow_Abstract
- * @todo see App_Model_DbRow_Abstract
  */
-class Admin_Model_DbRow_Group extends App_Model_DbRow_Abstract {
-    protected $id;
-    protected $name;
-    protected $description;
-    protected $memberscount;
+class Admin_Model_DbRow_Group extends App_Model_DbRow_Abstract
+{
     /**
-     * Maps the User Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
+     * If of the group
+     * @var int
      */
+    protected $id;
+    /**
+     * Name of the groups
+     * @var string
+     */
+    protected $name;
+    /**
+     * Description of the group
+     * @var string
+     */
+    protected $description;
+    /**
+     * members assigned to this group
+     * @var int
+     */
+    protected $memberscount;
+
     protected $_transformColumnMap = array(
         'id'          => 'ug_id',
         'name'        => 'ug_name',

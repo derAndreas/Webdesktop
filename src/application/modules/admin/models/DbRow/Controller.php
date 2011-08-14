@@ -17,22 +17,45 @@
 /**
  * @class Admin_Model_DbRow_Controller
  * @extends App_Model_DbRow_Abstract
- * @todo see App_Model_DbRow_Abstract
  */
-class Admin_Model_DbRow_Controller extends App_Model_DbRow_Abstract {
-    protected $id;
-    protected $moduleName;
-    protected $controllerName;
-    protected $enabled;
-    protected $virtual;
-    protected $status;
-    protected $description;
+class Admin_Model_DbRow_Controller extends App_Model_DbRow_Abstract
+{
     /**
-     * Maps the Controller Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
+     * Id of the controller
+     * @var int
      */
+    protected $id;
+    /**
+     * name of the module
+     * @var string
+     */
+    protected $moduleName;
+    /**
+     * name of the controller
+     * @var string
+     */
+    protected $controllerName;
+    /**
+     * flag if controller is en/disabled
+     * @var int
+     */
+    protected $enabled;
+    /**
+     * flag if the controller is virtual or in the normal ZF path
+     * @var int
+     */
+    protected $virtual;
+    /**
+     * discovering status between file and DB (is ctrl in db?)
+     * @var int
+     */
+    protected $status;
+    /**
+     * Description of the controller
+     * @var string
+     */
+    protected $description;
+
     protected $_transformColumnMap = array(
         'id'             => 'uamc_id',
         'moduleName'     => 'uamc_module',

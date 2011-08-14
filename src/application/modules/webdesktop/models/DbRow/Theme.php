@@ -19,16 +19,27 @@
  * @extends App_Model_DbRow_Abstract
  */
 class Webdesktop_Model_DbRow_Theme extends App_Model_DbRow_Abstract {
-    protected $id;
-    protected $name;
-    protected $src;
-    protected $preview;
     /**
-     * Maps the Theme Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
+     * ID of the Theme
+     * @var int
      */
+    protected $id;
+    /**
+     * Name of the Theme
+     * @var string
+     */
+    protected $name;
+    /**
+     * name of the css file
+     * @var string
+     */
+    protected $src;
+    /**
+     * name of the image file for a little preview
+     * @var string
+     */
+    protected $preview;
+
     protected $_transformColumnMap = array(
         'id'       => 'sth_id',
         'name'     => 'sth_name',

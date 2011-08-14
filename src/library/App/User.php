@@ -99,12 +99,6 @@ class App_User extends App_Model_DbRow_Abstract {
     protected $roles = array();
 
 
-    /**
-     * Maps the User Table to own defined keys
-     * to abstract more from db schema
-     *
-     * @var array
-     */
     protected $_transformColumnMap = array(
         'id'       => 'uu_id',
         'groupid'  => 'uu_ug_id',
