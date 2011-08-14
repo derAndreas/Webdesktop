@@ -181,7 +181,7 @@ class Admin_UserController extends Zend_Controller_Action {
     public function changepasswordAction()
     {
         $userRow = new Admin_Model_DbRow_User($this->dbUser->find($this->checkUserIdParam()));
-        $form    = new Admin_Form_Changepassword($userRow);
+        $form    = new Admin_Form_User_Changepassword($userRow);
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams()) 
