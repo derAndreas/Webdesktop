@@ -273,7 +273,7 @@ abstract class Webdesktop_Model_Modules_Abstract {
      *
      * @param Zend_Config $config
      */
-    public function setWebDesktopConfig(/*fixme: will make problems in Preferences.php Zend_Config */$config)
+    public function setWebDesktopConfig(Zend_Config $config)
     {
         $this->webdesktopConfig = $config;
     }
