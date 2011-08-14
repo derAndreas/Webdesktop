@@ -60,7 +60,7 @@ class Admin_GroupController extends Zend_Controller_Action {
      */
     public function addAction()
     {
-        $form = new Admin_Form_Group();
+        $form = new Admin_Form_Group_Group();
 
         IF($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
             $this->dbGroups->insert($this->getRequest()->getParam('name'), $this->getRequest()->getParam('description'));
@@ -82,7 +82,7 @@ class Admin_GroupController extends Zend_Controller_Action {
     public function editAction()
     {
         $groupRow = new Admin_Model_DbRow_Group($this->dbGroups->find($this->checkGroupIdParam()));
-        $form = new Admin_Form_Group($groupRow, 'edit');
+        $form = new Admin_Form_Group_Group($groupRow, 'edit');
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams())) {
