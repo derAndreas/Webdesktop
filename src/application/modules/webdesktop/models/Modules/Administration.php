@@ -968,7 +968,7 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
             $actionRow->fromArray(array(
                 'enabled' => $actionRow->get('enabled') == 0 ? 1 : 0
             ));
-            $actionModel->update($actionRow->toDbArray(array('enabled')), $actionRow->get('id'));
+            $actionModel->updateById($actionRow->toDbArray(array('enabled')), $actionRow->get('id'));
 
             RETURN $this->responseSuccess(array(
                 'actions' => array(
@@ -996,7 +996,7 @@ class Webdesktop_Model_Modules_Administration extends Webdesktop_Model_Modules_A
                 'enabled'     => $this->request->getParam('enabled', 'off') == 'on' ? 1 : 0,
                 'description' => $this->request->getParam('description', '')
             ));
-            $actionModel->update($actionRow->toDbArray(array('enabled', 'description')), $actionRow->get('id'));
+            $actionModel->updateById($actionRow->toDbArray(array('enabled', 'description')), $actionRow->get('id'));
 
             RETURN $this->responseSuccess();
         } ELSE {

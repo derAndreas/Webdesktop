@@ -89,11 +89,8 @@ class Admin_Model_DbTable_Acl_Action extends Zend_Db_Table_Abstract {
      * @param array $data
      * @param int $id
      * @return int number of affected rows
-     * @overwrite Zend_Db_Table_Abstract::update()
-     * @todo rename to an independent name, like updateById() to free the normal ZF method
-     *       from customization
      */
-    public function update($data, $id)
+    public function updateById($data, $id)
     {
         RETURN parent::update($data, $this->getAdapter()->quoteInto('uaa_id = ?', $id, Zend_Db::INT_TYPE));
     }

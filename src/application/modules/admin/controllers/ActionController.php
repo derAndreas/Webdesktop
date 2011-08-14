@@ -213,7 +213,7 @@ class Admin_ActionController extends Zend_Controller_Action {
             $actionRow->fromArray(array(
                 'enabled' => $actionRow->get('enabled') == 0 ? 1 : 0
             ));
-            $this->dbAction->update($actionRow->toDbArray(array('enabled')), $actionRow->get('id'));
+            $this->dbAction->updateById($actionRow->toDbArray(array('enabled')), $actionRow->get('id'));
         } ELSE {
             // FIXME: Error Handling
         }
@@ -244,7 +244,7 @@ class Admin_ActionController extends Zend_Controller_Action {
             IF($this->getRequest()->isPost()) {
                 IF($form->isValid($this->getRequest()->getParams())) {
                     $actionRow->set('description', $this->getRequest()->getParam('description'));
-                    $this->dbAction->update(
+                    $this->dbAction->updateById(
                         $actionRow->toDbArray(array('description')),
                         $actionRow->get('id')
                     );
