@@ -96,21 +96,56 @@ class Admin_RoleController extends Zend_Controller_Action {
      */
     public function addAction()
     {
+        $role = new Admin_Model_DbRow_Role(array(
+            'name'        => $this->getRequest()->getParam('name', ''),
+            'description' => $this->getRequest()->getParam('description', ''),
+            'enabled'     => 0
+        ));
+        FOREACH($this->dbGroup->fetchAll() AS $row) {
+            $groups[] = new Admin_Model_DbRow_Group($row);
+        }
 
-        $form = new Admin_Form_Role_Add;
+        FOREACH($this->dbUser->fetchAll() AS $row) {
+            $users[] = new Admin_Model_DbRow_User($row);
+        }
+
+        FOREACH($this->dbRole->fetchAll() AS $row) {
+            $inherit = new Admin_Model_DbRow_Role($row);
+            IF($inherit->get('id') !== $role->get('id')) {
+                $inhterits[] = $inherit;
+            }
+        }
+
+        $form = new Admin_Form_Role_Add($role, $groups, $users, $inhterits);
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams())) {
-                $role = new Admin_Model_DbRow_Role(array(
-                    'name'        => $this->getRequest()->getParam('name'),
-                    'description' => $this->getRequest()->getParam('description'),
-                    'enabled'     => 0
-                ));
+                
                 $this->dbRole->insert($role->toDbArray());
                 // get the last insert id for redirect to edit mode
                 $role->set('id', $this->dbRole->getAdapter()->lastInsertId());
 
-                $this->_redirect('admin/role/edit/id/' . $role->get('id'));
+                $selectedGroups    = $form->getValue('groups');
+                $selectedUsers     = $form->getValue('users');
+                $roleInheritance   = $form->getValue('inherit');
+
+                FOREACH($roleInheritance AS $inherit) {
+                    // dont insert "no inheritance" in the database or self as inheritance
+                    IF($inherit == 0 || $inherit == $role->get('id')) {
+                        continue;
+                    }
+                    $this->dbRoleInherit->insert($role->get('id'), $inherit);
+                }
+
+                FOREACH($selectedGroups AS $group) {
+                    $this->dbRoleMember->insert($role->get('id'), $group, Admin_Model_DbTable_Acl_RoleMember::MEMBER_TYPE_GROUP);
+                }
+
+                FOREACH($selectedUsers AS $user) {
+                    $this->dbRoleMember->insert($role->get('id'), $user, Admin_Model_DbTable_Acl_RoleMember::MEMBER_TYPE_USER);
+                }
+
+                $this->_redirect('admin/role/index');
             } ELSE {
                 $form->addError('Please check if you filled the form correctly.');
             }

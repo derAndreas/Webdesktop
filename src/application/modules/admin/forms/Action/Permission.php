@@ -1,6 +1,6 @@
 <?php
 /**
- * Form to change the User permissions in the ACL
+ * Form to change the permissions for an action
  *
  * @author Andreas Mairhofer <andreas@classphp.de>
  * @verion 0.1
@@ -13,11 +13,10 @@
 
 /**
  * @class Admin_Form_Action_Permission
- * @extends Zend_Form
- * @todo create a base form for all forms to reduce the LOC, like decorators and common fields
- *       every form should extend from this new form then
+ * @extends Admin_Form_Action_Base
  */
-class Admin_Form_Action_Permission extends Zend_Form {
+class Admin_Form_Action_Permission extends Admin_Form_Action_Base
+{
 
     /**
      * create the form to change permission
@@ -25,51 +24,30 @@ class Admin_Form_Action_Permission extends Zend_Form {
      * in this form we can set the acl roles, which are allowed or denied
      * for this action
      *
-     * @param Admin_Model_DbRow_Controller $ctrlRow
-     * @param Admin_Model_DbRow_Action $actionRow
+     * @param Admin_Model_DbRow_Controller $controller
+     * @param Admin_Model_DbRow_Action $action
      * @param array $roles array of Admin_Model_DbTable_Acl_Role Objects
      * @param array $rulesAllow
      * @param array $rulesDeny
      */
-    public function __construct(Admin_Model_DbRow_Controller $ctrlRow,
-                                Admin_Model_DbRow_Action $actionRow,
+    public function __construct(Admin_Model_DbRow_Controller $controller,
+                                Admin_Model_DbRow_Action $action,
                                 array $roles,
                                 array $rulesAllow,
                                 array $rulesDeny
                                 )
     {
-        $module = new Zend_Form_Element_Text('module');
-        $module->setLabel('Module: ')
-               ->setIgnore(TRUE)
-               ->setAttribs(array(
-                   'class' => 'text span-4',
-                   'readonly' => 'true'
-               ))
-               ->setValue($ctrlRow->get('moduleName'));
 
-        $controller = new Zend_Form_Element_Text('controller');
-        $controller->setLabel('Controller: ')
-                   ->setIgnore(TRUE)
-                   ->setAttribs(array(
-                       'class' => 'text span-4',
-                       'readonly' => 'true'
-                   ))
-                   ->setValue($ctrlRow->get('controllerName'));
+        parent::__construct($controller);
 
-        $action = new Zend_Form_Element_Text('action');
-        $action->setLabel('Action: ')
-                   ->setIgnore(TRUE)
-                   ->setAttribs(array(
-                       'class' => 'text span-4',
-                       'readonly' => 'true'
-                   ))
-                   ->setValue($actionRow->get('actionName'));
-
-
-        $rolesAllow = new Zend_Form_Element_MultiCheckbox('rolesallow');
-        $rolesAllow->setLabel('Allow access');
-        $rolesDeny = new Zend_Form_Element_MultiCheckbox('rolesdeny');
-        $rolesDeny->setLabel('Explicit Deny Access');
+        $rolesAllow = new Zend_Form_Element_MultiCheckbox('rolesallow', array(
+            'label'     => 'Allow access',
+            'order'     => 7
+        ));
+        $rolesDeny = new Zend_Form_Element_MultiCheckbox('rolesdeny', array(
+            'label'     => 'Explicit Deny Access',
+            'order'     => 8
+        ));
 
         FOREACH($roles AS $role) {
             $rolesAllow->addMultiOption($role->get('id'), $role->get('name'));
@@ -79,23 +57,20 @@ class Admin_Form_Action_Permission extends Zend_Form {
         $rolesAllow->setValue($rulesAllow);
         $rolesDeny->setValue($rulesDeny);
 
-
-        $submit = new Zend_Form_Element_Submit('save');
-        $submit->setLabel('save');
-
-        $hidden = new Zend_Form_Element_Hidden('id');
-        $hidden->setValue($actionRow->get('id'))
-               ->setRequired(TRUE);
-
-        $this->addElements(array($module, $controller, $action, $rolesAllow, $rolesDeny, $submit, $hidden));
-
-        $this->setDecorators(array(
-            'FormElements',
-            array('errors', array('class' => 'error', 'placement' => 'prepend')),
-            array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
-            array('Description', array('tag' => 'p', 'class' => 'error', 'placement' => 'prepend')),
-            'Form'
+        $this->addElements(array(
+            $rolesAllow,
+            $rolesDeny,
+            new Zend_Form_Element_Hidden('id', array(
+                'required'  => true,
+                'value'     => $action->get('id'),
+                'order'     => 11
+            ))
         ));
+
+        // remove description element (from base form)
+        $this->removeElement('description');
+        $this->getElement('action')->setValue($action->get('actionName'));
+
     }
 
     /**

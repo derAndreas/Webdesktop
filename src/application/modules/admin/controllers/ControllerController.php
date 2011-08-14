@@ -95,6 +95,8 @@ class Admin_ControllerController extends Zend_Controller_Action {
     {
         $ctrlRow = new Admin_Model_DbRow_Controller($this->dbCtrl->find($this->checkControllerIdParam()));
         $form      = new Admin_Form_Controller_Delete($ctrlRow);
+        $form->setAction('/noc/admin/controller/delete');
+        
         IF($ctrlRow->get('id')) {
             IF($this->getRequest()->isPost()) {
                 IF($form->isValid($this->getRequest()->getParams()) === TRUE
@@ -131,22 +133,19 @@ class Admin_ControllerController extends Zend_Controller_Action {
      */
     public function addAction()
     {
-        $module     = $this->getRequest()->getParam('modul');
-        $controller = $this->getRequest()->getParam('control');
-        $virtual    = $this->getRequest()->getParam('virtual', 0);
-        $form       = new Admin_Form_Controller_Add($module, $controller);
+        $row = new Admin_Model_DbRow_Controller(array(
+            'moduleName'     => $this->getRequest()->getParam('modul', ''),
+            'controllerName' => $this->getRequest()->getParam('control', ''),
+            'enabled'        => 0,
+            'virtual'        => $this->getRequest()->getParam('virtual', 0),
+            'description'    => $this->getRequest()->getParam('description', '')
+        ));
+        $form       = new Admin_Form_Controller_Add($row);
+        $form->setAction('/noc/admin/controller/add');
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams())) {
-                $row = new Admin_Model_DbRow_Controller(array(
-                    'moduleName'     => $this->getRequest()->getParam('modul', ''),
-                    'controllerName' => $this->getRequest()->getParam('control', ''),
-                    'enabled'        => 0,
-                    'virtual'        => $virtual,
-                    'description'    => $this->getRequest()->getParam('description', '')
-                ));
                 $this->dbCtrl->insert($row->toDbArray(array('moduleName', 'controllerName', 'enabled', 'virtual', 'description')));
-
                 $this->_redirect('admin/controller/scan');
             }
         }

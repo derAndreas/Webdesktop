@@ -1,6 +1,6 @@
 <?php
 /**
- * Form to edit a User in the ACL
+ * Form to edit an action
  *
  * @author Andreas Mairhofer <andreas@classphp.de>
  * @verion 0.1
@@ -13,68 +13,28 @@
 
 /**
  * @class Admin_Form_Action_Edit
- * @extends Zend_Form
- * @todo create a base form for all forms to reduce the LOC, like decorators and common fields
- *       every form should extend from this new form then
+ * @extends Admin_Form_Action_Base
  */
-class Admin_Form_Action_Edit extends Zend_Form {
+class Admin_Form_Action_Edit extends Admin_Form_Action_Base {
 
     /**
      * Setup the edit action form
      *
-     * @param Admin_Model_DbRow_Action $rowAction
-     * @param Admin_Model_DbRow_Controller $rowController
+     * @param Admin_Model_DbRow_Action $action
+     * @param Admin_Model_DbRow_Controller $controller
      */
-    public function __construct(Admin_Model_DbRow_Action $rowAction, Admin_Model_DbRow_Controller $rowController)
+    public function __construct(Admin_Model_DbRow_Controller $controller, Admin_Model_DbRow_Action $action)
     {
-        $module = new Zend_Form_Element_Text('module');
-        $module->setLabel('Module: ')
-               ->setIgnore(TRUE)
-               ->setAttribs(array(
-                   'class' => 'text span-4',
-                   'readonly' => 'true'
-               ))
-               ->setValue($rowController->get('moduleName'));
+        parent::__construct($controller);
 
-        $controller = new Zend_Form_Element_Text('controller');
-        $controller->setLabel('Controller: ')
-                   ->setIgnore(TRUE)
-                   ->setAttribs(array(
-                       'class' => 'text span-4',
-                       'readonly' => 'true'
-                   ))
-                   ->setValue($rowController->get('controllerName'));
+        $this->addElement(new Zend_Form_Element_Hidden('id', array(
+            'required'  => true,
+            'value'     => $action->get('id'),
+            'order'     => 11
+        )));
 
-        $action = new Zend_Form_Element_Text('action');
-        $action->setLabel('Action: ')
-                   ->setIgnore(TRUE)
-                   ->setAttribs(array(
-                       'class' => 'text span-4',
-                       'readonly' => 'true'
-                   ))
-                   ->setValue($rowAction->get('actionName'));
-
-        $description = new Zend_Form_Element_Textarea('description');
-        $description->setLabel('Description: ')
-                    ->addFilter('StripTags')
-                    ->setValue($rowAction->get('description'));
-
-        $hidden = new Zend_Form_Element_Hidden('id');
-        $hidden->setValue($rowAction->get('id'))
-               ->setRequired(TRUE);
-
-        $submit = new Zend_Form_Element_Submit('editbutton');
-        $submit->setLabel('Edit');
-
-        $this->addElements(array($module, $controller, $action, $description, $submit, $hidden));
-
-        $this->setDecorators(array(
-            'FormElements',
-            array('errors', array('class' => 'error', 'placement' => 'prepend')),
-            array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
-            array('Description', array('tag' => 'p', 'class' => 'error', 'placement' => 'prepend')),
-            'Form'
-        ));
+        $this->getElement('action')->setValue($action->get('actionName'));
+        $this->getElement('description')->setValue($action->get('description'));
     }
 
 }

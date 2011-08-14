@@ -135,6 +135,7 @@ class Admin_ActionController extends Zend_Controller_Action {
 
         $ctrl = new Admin_Model_DbRow_Controller($ctrl->current());
         $form       = new Admin_Form_Action_Add($ctrl, $action);
+        $form->setAction('/noc/admin/action/add');
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams())) {
@@ -170,12 +171,14 @@ class Admin_ActionController extends Zend_Controller_Action {
         $action     = $this->dbAction->find($this->checkActionIdParam());
 
         IF($action->count() !== 1) {
-            $form  = new Admin_Form_Action_Delete($actionRow, $ctrlRow);
+            $form  = new Admin_Form_Action_Delete($ctrlRow, $actionRow);
+            $form->setAction('/noc/admin/action/delete');
             $form->setErrors(array('Invalid ActionId, cannot proceed!'));
         } ELSE {
             $actionRow->fromArray($action);
             $ctrlRow->fromArray($this->dbController->find($actionRow->get('mcId')));
-            $form  = new Admin_Form_Action_Delete($actionRow, $ctrlRow);
+            $form  = new Admin_Form_Action_Delete($ctrlRow, $actionRow);
+            $form->setAction('/noc/admin/action/delete');
 
             IF($this->getRequest()->isPost()) {
                 IF($form->isValid($this->getRequest()->getParams()) === TRUE
@@ -234,12 +237,14 @@ class Admin_ActionController extends Zend_Controller_Action {
         $action    = $this->dbAction->find($this->checkActionIdParam());
 
         IF($action->count() !== 1) {
-            $form  = new Admin_Form_Action_Delete($actionRow, $ctrlRow);
+            $form  = new Admin_Form_Action_Edit($ctrlRow, $actionRow);
             $form->setErrors(array('Invalid ActionId, cannot proceed!'));
+            $form->setAction('/noc/admin/action/edit');
         } ELSE {
             $actionRow->fromArray($action);
             $ctrlRow->fromArray($this->dbController->find($actionRow->get('mcId')));
-            $form = new Admin_Form_Action_Edit($actionRow, $ctrlRow);
+            $form = new Admin_Form_Action_Edit($ctrlRow, $actionRow);
+            $form->setAction('/noc/admin/action/edit');
 
             IF($this->getRequest()->isPost()) {
                 IF($form->isValid($this->getRequest()->getParams())) {
@@ -291,6 +296,7 @@ class Admin_ActionController extends Zend_Controller_Action {
         }
 
         $form = new Admin_Form_Action_Permission($ctrlRow, $actionRow, $roles, $allowRules, $denyRules);
+        $form->setAction('/noc/admin/action/permission');
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams()) && $form->hasPermissionCollision($this->getRequest()) === FALSE) {

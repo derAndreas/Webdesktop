@@ -78,7 +78,8 @@ class Admin_UserController extends Zend_Controller_Action {
             $groups[] = new Admin_Model_DbRow_Group($group);
         }
 
-        $form  = new Admin_Form_User_User($groups);
+        $form  = new Admin_Form_User_Add($groups);
+        $form->setAction('/noc/admin/user/add');
 
         IF($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 
@@ -115,7 +116,8 @@ class Admin_UserController extends Zend_Controller_Action {
         FOREACH($this->dbGroup->getGroups() AS $group) {
             $groups[] = new Admin_Model_DbRow_Group($group);
         }
-        $form = new Admin_Form_User_User($groups, $userRow, 'edit');
+        $form = new Admin_Form_User_Edit($groups, $userRow, 'edit');
+        $form->setAction('/noc/admin/user/edit');
 
         IF($this->getRequest()->isPost()) {
             IF($form->isValid($this->getRequest()->getParams())) {
