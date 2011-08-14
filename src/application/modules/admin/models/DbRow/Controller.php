@@ -40,7 +40,7 @@ class Admin_Model_DbRow_Controller extends App_Model_DbRow_Abstract {
         'enabled'        => 'uamc_activated',
         'virtual'        => 'uamc_virtual',
         'description'    => 'uamc_description',
-        'status'         => '_dummy_'
+        'status'         => self::ROW_DUMMY
     );
 
     protected $defaultDbColumns = array('moduleName', 'controllerName', 'enabled', 'description');

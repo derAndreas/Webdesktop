@@ -41,9 +41,9 @@ class Admin_Model_DbRow_Action extends App_Model_DbRow_Abstract {
         'actionName'     => 'uaa_action',
         'enabled'        => 'uaa_activated',
         'description'    => 'uaa_description',
-        'moduleName'     => '_dummy_',
-        'controllerName' => '_dummy_',
-        'status'         => '_dummy_'
+        'moduleName'     => self::ROW_DUMMY,
+        'controllerName' => self::ROW_DUMMY,
+        'status'         => self::ROW_DUMMY
     );
 
     protected $defaultDbColumns = array('mcId', 'actionName', 'enabled', 'description');

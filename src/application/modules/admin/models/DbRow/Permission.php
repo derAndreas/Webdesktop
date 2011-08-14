@@ -39,7 +39,7 @@ class Admin_Model_DbRow_Permission extends App_Model_DbRow_Abstract {
         'aId'            => 'uaru_uaa_id',
         'roleId'         => 'uaru_uar_id',
         'rule'           => 'uaru_rule',
-        'roleName'       => '_dummy_'
+        'roleName'       => self::ROW_DUMMY
     );
 
     protected $defaultDbColumns = array('mcId', 'aId', 'roleId', 'rule');

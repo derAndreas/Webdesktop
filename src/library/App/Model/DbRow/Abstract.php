@@ -16,9 +16,16 @@
 
 /**
  * @class App_Model_DbRow_Abstract
- * @todo define abstract
  */
-class App_Model_DbRow_Abstract {
+abstract class App_Model_DbRow_Abstract {
+
+    /**
+     * Constant for a row dummy
+     * In the mapping it is possible to set JSCON columns, but they do not exist
+     * as DB columns. Use the dummy.
+     * @var int
+     */
+    CONST ROW_DUMMY = 0x01;
 
     /**
      * Maps the User Table to own defined keys

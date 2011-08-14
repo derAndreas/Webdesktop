@@ -120,8 +120,8 @@ class App_User extends App_Model_DbRow_Abstract {
         'fgcolor'  => 'uu_fgcolor',
         'transparency'  => 'uu_transparency',
         'wppos'    => 'uu_wpos',
-        'groupname'=> '_dummy_',
-        'roles'    => '_dummy_'
+        'groupname'=> self::ROW_DUMMY,
+        'roles'    => self::ROW_DUMMY
     );
     protected $defaultDbColumns   = array();
     protected $defaultJsonColumns = array();

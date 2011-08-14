@@ -34,7 +34,7 @@ class Admin_Model_DbRow_Group extends App_Model_DbRow_Abstract {
         'id'          => 'ug_id',
         'name'        => 'ug_name',
         'description' => 'ug_description',
-        'memberscount'=> '_dummy_'
+        'memberscount'=> self::ROW_DUMMY
     );
 
     protected $defaultDbColumns = array('name', 'description');
