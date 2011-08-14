@@ -133,8 +133,7 @@ class Webdesktop_ApiController extends Zend_Controller_Action
         $this->user   = $auth->getIdentity();
         $this->config = new Zend_Config_Ini(Zend_Registry::get('appConfigPath') . 'webdesktop.ini');
         //$this->model  = new Webdesktop_Model_Webdesktop($this->user, $this->config); //@todo: see class variable documentation??
-        $this->acl    = new Webdesktop_Model_Acl;
-        $this->acl->setUser($this->user);
+        $this->acl    = new Webdesktop_Model_Acl($this->user);
         
         // if no module is present, then we can not continue here
         IF($this->detectCallParameters(TRUE, FALSE) === FALSE) {
